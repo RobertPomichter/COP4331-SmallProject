@@ -1,5 +1,6 @@
-<? php
-  $inData = getRequestInfo();
+<?php
+  
+	$inData = getRequestInfo();
 	
 	$color = $inData["color"];
 	$userId = $inData["userId"];
