@@ -1,9 +1,12 @@
 <?php
   
-	$inData = getRequestInfo();
+	$inData = getRequestInfo(); //request the following info: first name, last name, login, and password
+
 	
-	$color = $inData["color"];
-	$userId = $inData["userId"];
+	$firstName = $inData["firstName"];	//read in first name
+	$lastName = $inData["lastName"];	//read in last name
+	$login = $inData["lastName"];		//read in login
+	$password = $inData["password"];	//read in password
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -12,7 +15,8 @@
 	} 
 	else
 	{
-		$sql = "insert into Colors (UserId,Name) VALUES (" . $userId . ",'" . $color . "')";
+		//insert into Users instead of Colors
+		$sql = "insert into Users (firstName,lastName, login, password) VALUES ('" . $firstName . "','" . $lastName . "','"$login"','"$password"')";
 		if( $result = $conn->query($sql) != TRUE )
 		{
 			returnWithError( $conn->error );
