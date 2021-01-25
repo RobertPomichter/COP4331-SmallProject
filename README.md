@@ -51,3 +51,5 @@ DELIVERABLES:
   10. ERD - 5 pts
   11. Explanation of technology used for project - 5 pts
   12. There are discretionary points for the instructor to award for project excellence - 10 pts
+
+  Max's test, will delete later!
