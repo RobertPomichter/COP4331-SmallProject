@@ -20,6 +20,7 @@
 		$conn->close();
 	}
 	
+	//perhaps need to add some sort of affirmation of a successful delete
 	returnWithError("");
 
 	function getRequestInfo()
