@@ -40,6 +40,27 @@ body
     background-color: #b2b2b2;
 }
 
+/* Start Register.html Unique Elements Styling*/
+#firstName
+{
+    font-size: 30px;
+}
+
+#lastName
+{
+    font-size: 30px;
+}
+
+#registerDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #b2b2b2;
+}
+/* End Register.html Unique Elements Styling*/
+
 .buttons
 {
     font-size: 30px;
