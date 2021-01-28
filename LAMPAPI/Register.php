@@ -1,6 +1,5 @@
 <?php  
         $inData = getRequestInfo(); //request the following info: first name, last name, login, and password
-
         
         $firstName = $inData["firstName"];      //read in first name
         $lastName = $inData["lastName"];        //read in last name

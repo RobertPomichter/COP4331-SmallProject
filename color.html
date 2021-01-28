@@ -3,8 +3,9 @@
 
 <html>
 <head>
-	<title>Color Manager (soon to be Contact Manager)</title>
+	<title>Contact Manager (WIP)</title>
 	<script type="text/javascript" src="js/code.js"></script>
+	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	
@@ -18,24 +19,32 @@
 </head>
 <body>
 
-<h1 id="title">Color Manager (soon to be Contact Manager)</h1>
+<h1 id="title">Contact Manager (WIP)</h1>
 
+<!-- User Logged In display information-->
 <div id="loggedInDiv">
-	<span id="userName"></span><br />
+	<span id="userName"></span><br />	<!-- Username text display element-->
+	<!-- Logout button, calls doLogout() from code.js-->
 	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
 </div>
 
+<!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
 <div id="accessUIDiv">
 	<br />
 
-	<input type="text" id="searchText" placeholder="Color To Search For"/>
+	<input type="text" id="searchText" placeholder="Color To Search For"/>	<!-- search bar inside text display-->
+	<!-- search button, calls searchColor() from code.js TODO: convert to search contact-->
 	<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Color </button><br />
+	<!-- search result display element (only displays text when search results exist)-->
 	<span id="colorSearchResult"></span>
 	<p id="colorList">
 	</p><br /><br />
 
-	<input type="text" id="colorText" placeholder="Color To Add">
+	<input type="text" id="colorText" placeholder="Color To Add">	<!-- add color bar inside text display-->
+	<!-- add color button, calls addColor() from code.js TODO: convert to add contact-->
 	<button type="button" id="addColorButton" class="buttons" onclick="addColor();"> Add Color </button><br />
+	<!-- color add result display element (only displays text when color was added
+		TODO: convert to add contact-->
 	<span id="colorAddResult"></span>
 </div>
 

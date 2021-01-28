@@ -1,24 +1,36 @@
 <!-- Page where new account registration takes place (WIP) -->
 
 <html>
+<!-- The header section is where you reference all the other code files you
+	will be using on this page. -->
 <head>
-	<title>Register New Account</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<title>Register New Account</title>	<!-- this is the page title that shows up in the browser tab-->
+	<script type="text/javascript" src="js/md5.js"></script> 	<!-- password hash code-->
+	<script type="text/javascript" src="js/code.js"></script>	<!-- main javascript code-->
+	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
+    <link href="css/styles.css" rel="stylesheet">				<!-- CSS styling sheet-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">	<!-- font reference-->
 </head>
+
+<!-- The body section is where the main content of your page goes (similar to a program's main() section)-->
 <body>
+<h1 id="title">Registration Page</h1>		<!-- Header 1 title text-->
 
-<h1 id="title">Registration Page</h1>
-
-<div id="loginDiv">
+<!-- Register Section TODO: convert all references to login to register,
+	implement actual registration behavior the HTML is responsible for-->
+<div id="registerDiv">
+	<!-- Register prompt text-->
 	<span id="inner-title">Please enter your desired username and password (WIP)</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
-	<span id="loginResult"></span>
-	<a href="index.html">Home (login page)</a>
+	<input type="text" id="loginName" placeholder="Username" /><br />	<!-- username input field-->
+	<input type="password" id="loginPassword" placeholder="Password"/><br />	<!-- password input field-->
+
+	<!-- submit button, calls -->
+	<button type="button" id="registerButton" class="buttons" onclick="doRegister();"> Submit </button>
+	<span id="registerResult"></span> <!-- register result message display element, only displays error messages-->
+
+	<!-- link to home page (index.html) for when the user doesn't registering a new account
+		and wants to return to the log in page -->
+	<a href="index.html">Home (login page)</a>	<!-- OPTION: button vs. link?-->
 </div>
 
 </body>

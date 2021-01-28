@@ -1,26 +1,46 @@
 <!-- This is the index file that's in /var/www/html/  
 	 Editing this file appears to correctly change the website's
-	 appearance so it seems to be in the correct filepath. -->
+	 appearance so it seems to be in the correct filepath. 
+
+	 HTML uses an <Open Tag> ...(content here)... </Close Tag> system for every element. 
+	 For each element, you can apply "attributes" to help define them, such as "type"
+	 for what code language a file is in, or "id" to give an element a descriptive name.
+
+	 User Account Data gathered here:
+	 	id: loginName	placeholder: Username
+	 	id: loginPassword	placeholder: Password
+-->
 
 <html>
+
+<!-- The header section is where you reference all the other code files you
+	will be using on this page. -->
 <head>
-	<title>AngryRedAngler</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<title>AngryRedAngler</title>	<!-- this is the page title that shows up in the browser tab-->
+	<script type="text/javascript" src="js/md5.js"></script> 	<!-- password hash code-->
+	<script type="text/javascript" src="js/code.js"></script>	<!-- main javascript code-->
+	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
+    <link href="css/styles.css" rel="stylesheet">				<!-- CSS styling sheet-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">	<!-- font reference-->
 </head>
+
+<!-- The body section is where the main content of your page goes (similar to a program's main() section)-->
 <body>
+<h1 id="title">Contact Manager</h1>		<!-- Header 1 title text-->
 
-<h1 id="title">Contact Manager</h1>
-
+<!-- Log In Section -->
 <div id="loginDiv">
-	<span id="inner-title">PLEASE LOG IN</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
-	<span id="loginResult"></span>
-	<a href="register.html">Don't have an account? Register here!</a>
+	<span id="inner-title">PLEASE LOG IN</span> <!-- log in message text-->
+	<input type="text" id="loginName" placeholder="Username" /><br />	<!-- username input field-->
+	<input type="password" id="loginPassword" placeholder="Password"/><br />	<!-- password input field-->
+
+	<!-- submit button, calls "doLogin()" in code.js-->
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Submit </button>
+
+	<span id="loginResult"></span> <!-- login result message display element, only displays error messages-->
+
+	<!-- hyperlink to register page and the text of the link-->
+	<a href="register.html">Don't have an account? Register here!</a>	<!-- OPTION: button vs. link?-->
 </div>
 
 </body>
