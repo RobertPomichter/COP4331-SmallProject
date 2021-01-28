@@ -5,7 +5,7 @@
 	
 	$firstName = $inData["firstName"];	//read in first name
 	$lastName = $inData["lastName"];	//read in last name
-	$login = $inData["lastName"];		//read in login
+	$login = $inData["login"];		//read in login
 	$password = $inData["password"];	//read in password
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
