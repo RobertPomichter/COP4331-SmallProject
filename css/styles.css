@@ -1,3 +1,9 @@
+/*
+    Troubleshooting: if CSS is not updated on website after updating the
+    server's CSS file, press CTRL + F5 to force the browser to reload all
+    resources for the website.
+*/
+
 body 
 {
     background-color: #707070;
@@ -39,6 +45,27 @@ body
     padding: 25px;
     background-color: #b2b2b2;
 }
+
+/* Start Register.html Unique Elements Styling*/
+#firstName
+{
+    font-size: 30px;
+}
+
+#lastName
+{
+    font-size: 30px;
+}
+
+#registerDiv
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #b2b2b2;
+}
+/* End Register.html Unique Elements Styling*/
 
 .buttons
 {
