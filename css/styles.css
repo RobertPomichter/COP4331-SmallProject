@@ -1,3 +1,9 @@
+/*
+    Troubleshooting: if CSS is not updated on website after updating the
+    server's CSS file, press CTRL + F5 to force the browser to reload all
+    resources for the website.
+*/
+
 body 
 {
     background-color: #707070;

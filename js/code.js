@@ -99,14 +99,14 @@ function doLogin()
 
 // TODO: Performs the Register User function using user information captured by register.html
 // and by calling the Register.php API endpoint
+// Requires User information: firstName, lastName, loginName, loginPassword
 function doRegister()
 {
-	// copy and pasting doLogin() code to modify
 	// initialization section
 	userId = 0;
-	firstName = "";
-	lastName = "";
 	
+	var firstName = document.getElementById("firstName").value;	// grab firstName from register.html
+	var lastName = document.getElementById("lastName").value;	// grab lastName from register.html
 	var login = document.getElementById("loginName").value;	// grab loginName from register.html
 	var password = document.getElementById("loginPassword").value;	// grab loginPassword from register.html
 //	var hash = md5( password );	// create hashed password using md5.js algorithm
@@ -118,9 +118,52 @@ function doRegister()
 //	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
 
 	// JSON package creation - user's inputted password version
-	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
+	// Gathers firstName, lastName, loginName, loginPassword
+	var jsonPayload = '{"firstName" : "' + firstName +'", "lastName" : "' + lastName + '", "login" : "' + login + '", "password" : "' + password + '"}';
 
 	var url = urlBase + '/Register.' + extension;	// url shortcut variable made to Register.php
+
+	/*
+	XML is a a programming tool that uses a language very similar to HTML,
+	but is only for handling data storage and transport.
+	*/
+
+	// XMLHttpRequests are objects used to communicate with servers.
+	// You can access page data without needing to refresh the page,
+	// which avoids interrupting the user during their visit.
+	var xhr = new XMLHttpRequest();	// constructor to initialize a new XMLHttpRequest (AKA: XHR)
+
+	// Starts the communication request using the POST method, which indicates that data is
+	// going to be sent to the Register.php file located at the "url". The Boolean is to specify
+	// the use of synchronous or asynchronous methods.
+	xhr.open("POST", url, false);
+
+	/* Sets the parameters of the HTTP Request Header, which is a header section in the HTTP
+	   request that defines information about the data that is going to be handled. Here the
+	   header's media type (listed as "Content-type"), is being described. The media type is
+	   described as an application type with a subtype of JSON, and "charset=UTF-8" describes
+	   the set of characters to be used. Charset=UTF-8 is an ASCII alternative character set
+	   and is preferred in web page coding.
+	*/
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	// TODO: convert from doLogin() copy paste to doRegister() functionality
+	// errors can happen during XHR communication
+	try
+	{
+		xhr.send(jsonPayload);	// sends the communication request (with the JSON data)
+		
+		// TODO: Add a success message section
+
+		// TODO: Add an account already exists message section?
+		
+	}
+	// Error if registration communication fails?
+	catch(err)
+	{
+		// assign error message to registerResult in register.html
+		document.getElementById("registerResult").innerHTML = err.message;
+	}
 }
 
 function saveCookie()
