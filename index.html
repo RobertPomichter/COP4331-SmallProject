@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!-- This is the index file that's in /var/www/html/  
 	 Editing this file appears to correctly change the website's
 	 appearance so it seems to be in the correct filepath. 
@@ -15,8 +16,13 @@
 
 <!-- The header section is where you reference all the other code files you
 	will be using on this page. -->
-<head>
-	<title>AngryRedAngler</title>	<!-- this is the page title that shows up in the browser tab-->
+<head lang="en">
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>AngryRedAngler</title>	<!-- this is the page title that shows up in the browser tab-->
 	<script type="text/javascript" src="js/md5.js"></script> 	<!-- password hash code-->
 	<script type="text/javascript" src="js/code.js"></script>	<!-- main javascript code-->
 	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
@@ -26,10 +32,12 @@
 
 <!-- The body section is where the main content of your page goes (similar to a program's main() section)-->
 <body>
-<h1 id="title">Contact Manager</h1>		<!-- Header 1 title text-->
+<div class="container">
+  <h1 id="title">Contact Manager</h1>		<!-- Header 1 title text-->
+</div>
 
 <!-- Log In Section -->
-<div id="loginDiv">
+<div id="loginDiv" class="container-fluid">
 	<span id="inner-title">PLEASE LOG IN</span> <!-- log in message text-->
 	<input type="text" id="loginName" placeholder="Username" /><br />	<!-- username input field-->
 	<input type="password" id="loginPassword" placeholder="Password"/><br />	<!-- password input field-->

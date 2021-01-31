@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- Contact Manager Page (WIP) -->
+
+<html>
+<head lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Contact Manager (WIP)</title>
+	<script type="text/javascript" src="js/code.js"></script>
+	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
+    <link href="css/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() 
+	{
+		readCookie();
+	}, false);
+	</script>
+	
+</head>
+<body>
+
+<h1 id="title">Contact Manager (WIP)</h1>
+
+<!-- User Logged In display information-->
+<div id="loggedInDiv">
+	<span id="userName"></span><br />	<!-- Username text display element-->
+	<!-- Logout button, calls doLogout() from code.js-->
+	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+</div>
+
+<!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
+<div id="accessUIDiv">
+	<br />
+
+
+	<span id="referenceToContactManager">(for Color Manager, click the link below!)</span>
+  <br />
+	<a href="color.html">Go To Color Manager</a>
+</div>
+
+</body>
+</html>

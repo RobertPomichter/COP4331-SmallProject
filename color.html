@@ -3,7 +3,7 @@
 
 <html>
 <head>
-	<title>Contact Manager (WIP)</title>
+	<title>Color Manager</title>
 	<script type="text/javascript" src="js/code.js"></script>
 	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
     <link href="css/styles.css" rel="stylesheet">	
@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<h1 id="title">Contact Manager (WIP)</h1>
+<h1 id="title">Color Manager</h1>
 
 <!-- User Logged In display information-->
 <div id="loggedInDiv">
@@ -32,6 +32,7 @@
 <div id="accessUIDiv">
 	<br />
 
+	<span id="referenceToContactManager">(for Contact Manager, click the link below!)</span>
 	<input type="text" id="searchText" placeholder="Color To Search For"/>	<!-- search bar inside text display-->
 	<!-- search button, calls searchColor() from code.js TODO: convert to search contact-->
 	<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Color </button><br />
@@ -46,6 +47,7 @@
 	<!-- color add result display element (only displays text when color was added
 		TODO: convert to add contact-->
 	<span id="colorAddResult"></span>
+	<a href="contactManager.html">Go To Contact Manager</a>
 </div>
 
 </body>
