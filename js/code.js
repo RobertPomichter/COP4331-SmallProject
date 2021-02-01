@@ -87,7 +87,7 @@ function doLogin()
 						// cookie expires after 20 minutes
 	
 		// TODO: convert to contact manager
-		window.location.href = "color.html";	// redirect user to color.html page
+		window.location.href = "contactManager.html";	// redirect user to contactManager.html page
 	}
 	catch(err)
 	{
@@ -164,6 +164,43 @@ function doRegister()
 		// assign error message to registerResult in register.html
 		document.getElementById("registerResult").innerHTML = err.message;
 	}
+}
+
+// TODO: Test to see if works
+function doAddContact()
+{
+	userId = getUserId();	// extract userId from saved cookie
+
+	// TODO: double check the proper casing for these variables to maintain consistency
+	var firstName = document.getElementById("contactFirstName").value;
+	var lastName = document.getElementById("contactLastName").value;
+	var email = document.getElementById("contactEmail").value;
+	var phone = document.getElementById("contactPhone").value;
+
+	// Gathers Contact Information: firstName, lastName, email, phone
+	// Gather User Information: userId
+	var jsonPayload = '{"userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "email" : "' + email + '", "phone" : "' + phone + '"}';
+
+	var url = urlBase + '/AddContact.' + extension;	// shortcut to AddContact.php endpoint
+
+	// TODO: figure out if synchronous or asynchronous is preferred in xhr.open
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("addContactResult").innerHTML = err.message;
+	}
+}
+
+function doSearchContact()
+{
+
 }
 
 function saveCookie()
@@ -286,4 +323,58 @@ function searchColor()
 		document.getElementById("colorSearchResult").innerHTML = err.message;
 	}
 	
+}
+
+function getUserId()
+{
+	// Copied from readCookie()
+	var data = document.cookie;
+	var splits = data.split(",");
+	for(var i = 0; i < splits.length; i++) 
+	{
+		var thisOne = splits[i].trim();
+		var tokens = thisOne.split("=");
+		if( tokens[0] == "firstName" )
+		{
+			firstName = tokens[1];
+		}
+		else if( tokens[0] == "lastName" )
+		{
+			lastName = tokens[1];
+		}
+		else if( tokens[0] == "userId" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
+	}
+
+	return userId;
+}
+
+
+// DEBUG ONLY, tests obtaining userId from saved cookie
+function doTestUserId()
+{
+	// Copied from readCookie()
+	var data = document.cookie;
+	var splits = data.split(",");
+	for(var i = 0; i < splits.length; i++) 
+	{
+		var thisOne = splits[i].trim();
+		var tokens = thisOne.split("=");
+		if( tokens[0] == "firstName" )
+		{
+			firstName = tokens[1];
+		}
+		else if( tokens[0] == "lastName" )
+		{
+			lastName = tokens[1];
+		}
+		else if( tokens[0] == "userId" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
+	}
+
+	alert("UserId = " + userId);
 }

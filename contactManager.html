@@ -35,12 +35,35 @@
 
 <!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
 <div id="accessUIDiv">
-	<br />
-
 
 	<span id="referenceToContactManager">(for Color Manager, click the link below!)</span>
-  <br />
+    <br />
 	<a href="color.html">Go To Color Manager</a>
+	<br /><br /><br />
+
+	<!-- TEST: Obtain UserId from cookie-->
+	<button type="button" id="userIdTestButton" class="buttons" onclick="doTestUserId();">What's my User ID?</button>
+
+	<!-- Add Contact Section-->
+	<div id="addContactUI">
+		<span id="addContactTitle">Add Contact Function (WIP, untested until Search Contacts works)</span>
+		<input type="text" id="contactFirstName" placeholder="First Name" /><br />
+		<input type="text" id="contactLastName" placeholder="Last Name" /><br />
+		<input type="text" id="contactPhone" placeholder="Phone" /><br />
+		<input type="text" id="contactEmail" placeholder="Email" /><br />
+		<!-- Submission button to trigger Add Contact function-->
+		<button type="button" id="addContactButton" class="buttons" onclick="doAddContact();"> Add Contact </button>
+	</div>
+	<br /><br /><br />
+
+	<!-- Search Contacts Section-->
+	<div id="searchContactsUI">
+		<span id="searchContactsTitle">Search Contacts Function (WIP)</span>
+		<input type="text" id="contactFirstName" placeholder="First Name" /><br />
+		<input type="text" id="contactLastName" placeholder="Last Name" /><br />
+		<!-- Submission button to trigger Search Contacts function-->
+		<button type="button" id="searchContactsButton" class="buttons" onclick="doSearchContact();"> Search Contacts (WIP) </button>
+	</div>
 </div>
 
 </body>
