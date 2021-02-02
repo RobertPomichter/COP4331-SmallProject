@@ -18,11 +18,11 @@
 	will be using on this page. -->
 <head lang="en">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<title>AngryRedAngler</title>	<!-- this is the page title that shows up in the browser tab-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>AngryRedAngler</title>	<!-- this is the page title that shows up in the browser tab-->
 	<script type="text/javascript" src="js/md5.js"></script> 	<!-- password hash code-->
 	<script type="text/javascript" src="js/code.js"></script>	<!-- main javascript code-->
 	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
@@ -32,47 +32,26 @@
 
 <!-- The body section is where the main content of your page goes (similar to a program's main() section)-->
 <body>
+<div class="container">
+  <h1 id="title">Contact Manager</h1>		<!-- Header 1 title text-->
+</div>
 
+<!-- Log In Section -->
+<div id="loginDiv" class="container-fluid">
+	<span id="inner-title">PLEASE LOG IN</span> <!-- log in message text-->
+	<input type="text" id="loginName" placeholder="Username" /><br />	<!-- username input field-->
+	<input type="password" id="loginPassword" placeholder="Password"/><br />	<!-- password input field-->
+
+	<!-- submit button, calls "doLogin()" in code.js-->
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Submit </button>
+
+	<span id="loginResult"></span> <!-- login result message display element, only displays error messages-->
+
+	<!-- TODO: set up pressing 'enter' as an alternate to the Submit button-->
 	
-
-	<div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-2"></div>
-            <div class="col-lg-6 col-md-8 login-box">
-                <div class="col-lg-12 login-key">
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                </div>
-                <div class="col-lg-12 login-title">
-                    ARA Login Page
-                </div>
-
-                <div class="col-lg-12 login-form">
-                    <div class="col-lg-12 login-form">
-                        <form>
-                            <div class="form-group">
-                                <label class="form-control-label">USERNAME</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">PASSWORD</label>
-                                <input type="password" class="form-control" i>
-                            </div>
-
-                            <div class="col-lg-12 loginbttm">
-                                <div class="col-lg-6 login-btm login-text">
-                                    <!-- Error Message -->
-                                </div>
-                                <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" class="btn btn-outline-primary">LOGIN</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-2"></div>
-            </div>
-        </div>
-	</div>
+	<!-- hyperlink to register page and the text of the link-->
+	<a href="register.html">Don't have an account? Register here!</a>	<!-- OPTION: button vs. link?-->
+</div>
 
 </body>
 </html>
