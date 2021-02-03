@@ -59,10 +59,17 @@
 	<!-- Search Contacts Section-->
 	<div id="searchContactsUI">
 		<span id="searchContactsTitle">Search Contacts Function (WIP)</span>
-		<input type="text" id="contactFirstName" placeholder="First Name" /><br />
-		<input type="text" id="contactLastName" placeholder="Last Name" /><br />
+		<input type="text" id="searchFirstName" placeholder="First Name" /><br />
+		<input type="text" id="searchLastName" placeholder="Last Name" /><br />
 		<!-- Submission button to trigger Search Contacts function-->
-		<button type="button" id="searchContactsButton" class="buttons" onclick="doSearchContact();"> Search Contacts (WIP) </button>
+		<button type="button" id="searchContactsButton" class="buttons" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br />
+
+		<span id="searchContactsResult"></span><br />
+		<!-- Section marker where the actual contact search results are listed-->
+		<div id="searchContactsResultsStart"></div>
+
+		<!-- Individual contact divs inserted here-->
+		
 	</div>
 </div>
 
