@@ -1,6 +1,6 @@
 body {
     background-image: url("../images/arab.jpg");
-    background-size: 100% auto;
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
@@ -8,15 +8,21 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.login-box {
+footer {
+	text-align: center;
+	color: white;
+}
+
+.login-box, .registration-box {
     margin-top: 75px;
     height: auto;
     background: #1A2226;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	border-radius: 15px;
 }
 
-.login-key {
+.login-key, .logo-key {
     height: 100px;
     font-size: 80px;
     line-height: 100px;
@@ -25,7 +31,14 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-.login-title {
+.instructions {
+	text-align: center;
+    color: #ECF0F5;
+    font-weight: bold;
+	font-size: 15px;
+}
+
+.login-title, .registration-title {
     margin-top: 15px;
     text-align: center;
     font-size: 30px;
@@ -35,7 +48,7 @@ body {
     color: #ECF0F5;
 }
 
-.login-form {
+.login-form, .registration-form {
     margin-top: 25px;
     text-align: left;
 }
@@ -100,7 +113,7 @@ label {
 .btn-outline-primary {
     border-color: #0DB8DE;
     color: #0DB8DE;
-    border-radius: 0px;
+    border-radius: 10px;
     font-weight: bold;
     letter-spacing: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -111,22 +124,46 @@ label {
     right: 0px;
 }
 
-.login-btm {
+.login-btm, .registration-btm {
     float: left;
 }
 
-.login-button {
+.login-button, .register-button {
     padding-right: 0px;
     text-align: right;
     margin-bottom: 25px;
 }
 
-.login-text {
+.login-text, .registration-text {
     text-align: left;
     padding-left: 0px;
     color: #A2A4A4;
 }
 
-.loginbttm {
+.loginbttm, .registrationbttm {
     padding: 0px;
+}
+
+img {
+	vertical-align: middle;
+	margin: 20px;
+	border-radius: 15px;
+}
+
+img:hover {
+	opacity: .7;
+    right: 0px;
+}
+
+.d-block {
+	display: block!important;
+}
+
+.mx-auto {
+	margin-right: auto!important;
+	margin-left: auto!important;
+}
+
+.mb-4 {
+	margin-bottom: 1.5rem!important; 
 }
