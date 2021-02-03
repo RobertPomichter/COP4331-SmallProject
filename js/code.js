@@ -246,7 +246,7 @@ function doSearchContacts()
 		// insert the following HTML for each contact
 		for (i = 0; i < numContacts; i++) {
 			// insert a div section
-			$("searchContactsResultsStart").append("<div id="contactEntry"></div>");
+			$("searchContactsResultsStart").append("<div id='contactEntry'></div>");
 		}
 	}
 	catch(err)
