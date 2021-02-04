@@ -39,20 +39,22 @@
         <div class="row">
             <div class="col-lg-3 col-md-2"></div>
             <div class="col-lg-6 col-md-8 login-box">
-                <div class="col-lg-12 login-key">
-                    <i class="fa fa-key" aria-hidden="true"></i>
+				<div class="col-lg-12 logo-key">
+					<!----------------Logo Image----------------->
+					<a href="index.html">
+						<img class="d-block mx-auto mb-4" src="./images/aral.png" alt="Red Angler Fish Logo" width="126" height="100">
+					</a>						
                 </div>
-                <div class="col-lg-12 login-title">
-                    ARA Login Page
-                </div>
-
+                <div class="col-lg-12 login-title"><h1>ARA Login Page</h1></div>
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
                         <form>
+							<!-----------username input field------------>
                             <div class="form-group">
                                 <label class="form-control-label">USERNAME</label>
                                 <input type="text" id="loginName" class="form-control">
                             </div>
+							<!-----------password input field------------>
                             <div class="form-group">
                                 <label class="form-control-label">PASSWORD</label>
                                 <input type="password" id="loginPassword" class="form-control" i>
@@ -63,9 +65,9 @@
                                     <!-- Error Message -->
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" id="loginButton" class="btn btn-outline-primary" onclick="doLogin();">LOGIN</button>
+                                    <button type="button" id="loginButton" class="btn btn-outline-primary" onclick="doLogin();">LOGIN</button>
                                 </div>
-								<a href="register.html">Registration Page!</a>
+								<a href="register.html">Don't have an account? Click here!</a>
                             </div>
                         </form>
                     </div>
