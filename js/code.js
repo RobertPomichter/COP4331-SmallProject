@@ -79,7 +79,7 @@ function doLogin()
 			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			return;
 		}
-		
+
 		firstName = jsonObject.firstName;	// extract firstName from jsonObject
 		lastName = jsonObject.lastName;		// extract lastName from jsonObject
 
@@ -153,8 +153,16 @@ function doRegister()
 	{
 		xhr.send(jsonPayload);	// sends the communication request (with the JSON data)
 		
-		// TODO: Add a success message section
-
+		// TEST: Add a success message section
+		if(err.message === ""){
+			alert("Yay!");
+		}
+				
+		//Empty field error messge
+		if(firstName === "" || lastName === "" || login === "" || password === ""){
+		
+			document.getElementById("registerResult").innerHTML = "Please fill all fields";
+		}
 		// TODO: Add an account already exists message section?
 		
 	}
@@ -166,7 +174,6 @@ function doRegister()
 	}
 }
 
-// TODO: Test to see if works
 function doAddContact()
 {
 	userId = getUserId();	// extract userId from saved cookie
@@ -188,6 +195,7 @@ function doAddContact()
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
+	// TODO: check addColor() for extra statements in the try section and research functionality
 	try
 	{
 		xhr.send(jsonPayload);
@@ -198,9 +206,53 @@ function doAddContact()
 	}
 }
 
-function doSearchContact()
+function doSearchContacts()
 {
+	userId = getUserId();
+	var numContacts = 0;
+	var i = 0;
 
+	// TODO: ask what the search contacts input data is formatted like (user inputs into one text field,
+	// or user inputs into a firstName field and a lastName field)?
+
+	var firstName = document.getElementById("searchFirstName").value;
+	var lastName = document.getElementById("searchLastName").value;
+
+	// Gather search contact information, put into JSON package
+	// User Input gathered: userId, searchFirstName, searchLastName
+	var jsonPayload = '{"userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '"}';
+
+	var url = urlBase + '/SearchContacts.' + extension;	// shortcut to SearchContacts.php endpoint
+
+	// TODO: figure out if synchronous or asynchronous is preferred in xhr.open
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	// TODO: check why the prof's example code includes so many
+	try
+	{
+		xhr.send(jsonPayload);
+
+		// DEBUG: success message for xhr communication and JSON retrieval
+		document.getElementById("searchContactsResult").innerHTML = "Contacts Retrieved";
+
+		// JSON response package received, start inserting contact entry information into contactManager.html
+		var jsonObject = JSON.parse(xhr.responseText);
+
+		// count number of contacts in list (each content occupies 4 )
+		numContacts = jsonObject.results.length / 4;
+
+		// insert the following HTML for each contact
+		for (i = 0; i < numContacts; i++) {
+			// insert a div section
+			$("searchContactsResultsStart").append("<div id='contactEntry'></div>");
+		}
+	}
+	catch(err)
+	{
+		document.getElementById("searchContactsResult").innerHTML = err.message;
+	}	
 }
 
 function saveCookie()
