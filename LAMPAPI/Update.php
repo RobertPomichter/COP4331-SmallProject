@@ -41,4 +41,7 @@
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
+	
+	//update Contacts set firstName = 'Jordan', lastName = 'Collins', email = 'testing@test.com', phone = '123-456-7890' where ID = 1 and userId = 1;
+	//update Contacts set firstName = 'Joshua', lastName = 'Test1', email = 'joshtest@gmail.com' where ID = 8 and userId = 1;
 ?>

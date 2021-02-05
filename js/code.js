@@ -153,17 +153,18 @@ function doRegister()
 	{
 		xhr.send(jsonPayload);	// sends the communication request (with the JSON data)
 		
-		// TEST: Add a success message section
-		if(err.message === ""){
-			alert("Yay!");
-		}
 				
 		//Empty field error messge
 		if(firstName === "" || lastName === "" || login === "" || password === ""){
 		
 			document.getElementById("registerResult").innerHTML = "Please fill all fields";
 		}
-		// TODO: Add an account already exists message section?
+
+		// TEST: Add a success message section
+               else{
+			 document.getElementById("registerResult").innerHTML = "Registration Successful!";
+		}	
+	// TODO: Add an account already exists message section?
 		
 	}
 	// Error if registration communication fails?
