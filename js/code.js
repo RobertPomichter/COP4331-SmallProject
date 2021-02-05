@@ -13,6 +13,7 @@ var extension = 'php';
 var userId = 0;
 var firstName = "";
 var lastName = "";
+var didSearch = false;
 
 // Performs the Log In function using user information captured by index.html
 // and by calling the Login.php API endpoint. ONLY used in Login Page.
@@ -211,6 +212,8 @@ function doSearchContacts()
 	userId = getUserId();
 	var numContacts = 0;
 	var i = 0;
+	var contactBlock;
+	var testMessage = "<span>This is a single contact entry!</span> <br />";
 
 	// TODO: ask what the search contacts input data is formatted like (user inputs into one text field,
 	// or user inputs into a firstName field and a lastName field)?
@@ -243,16 +246,153 @@ function doSearchContacts()
 		// count number of contacts in list (each content occupies 4 )
 		numContacts = jsonObject.results.length / 4;
 
+		// DEBUG: insert new HTML element for displaying number of contacts (THIS WORKS, IS TEDIOUS)
+		var numContactsMessage = document.createElement("span");	// create element
+		numContactsMessage.setAttribute("id", "numContactsMessage");	// set id
+		numContactsMessage.innerHTML = "You have this many contacts: " + numContacts;	// new way
+		var displayResultsSection = document.getElementById("searchContactsResultsStart");	// get the parent element you're adding a child to
+		displayResultsSection.appendChild(numContactsMessage);	// add the new child element to the parent element
+
 		// insert the following HTML for each contact
 		for (i = 0; i < numContacts; i++) {
-			// insert a div section
-			$("searchContactsResultsStart").append("<div id='contactEntry'></div>");
+			createContactEntryBlock(i);	// create div contact entry block
+			populateContactEntry(i);	// fill contact entry block with HTML elements
+			assignSearchData(i, jsonObject);	// assign correct search results to each HTML element
 		}
 	}
 	catch(err)
 	{
 		document.getElementById("searchContactsResult").innerHTML = err.message;
 	}	
+}
+
+function assignSearchData(entryNumber, jsonObject)
+{
+	// each contact entry's data takes up 4 jsonObject array slots
+	// example: contact 0 is stored in jsonObject[0] - jsonObject[3]
+	// ensure the proper indices are used for the correct contact's information
+
+	var startIndex = 0;
+	var endIndex = 0;
+
+	// obtain correct indices for the contact's information
+	startIndex = entryNumber * 4;
+	endIndex = startIndex + 4;
+
+	// use variables as shortcuts to the correct contact's information elements 
+	var firstName = document.getElementById("firstNameResult" + entryNumber);
+	var lastName = document.getElementById("lastNameResult" + entryNumber);
+	var email = document.getElementById("emailResult" + entryNumber);
+	var phone = document.getElementById("phoneResult" + entryNumber);
+
+	// assign search result information to the contact's entry
+	firstName.innerHTML = jsonObject.results[startIndex];	// firstName is first in jsonObject
+	lastName.innerHTML = jsonObject.results[startIndex + 1];	// lastName is second in jsonObject
+	phone.innerHTML = jsonObject.results[startIndex + 2];	// phone is third in jsonObject
+	email.innerHTML = jsonObject.results[endIndex];		// email is fourth in jsonObject
+
+	// all contact information should be assigned at this point
+}
+
+function populateContactEntry(entryNumber)
+{
+	// create FirstName label element
+	var firstNameText = document.createElement("span");
+	firstNameText.setAttribute("class", "contactInfoText");
+	firstNameText.setAttribute("id", "");	// maybe not needed
+	firstNameText.innerHTML = "First Name: ";
+	var contactBlock = document.getElementById(entryNumber);
+	contactBlock.appendChild(firstNameText);
+
+	// create FirstName result element
+	var firstNameResult = document.createElement("span");
+	firstNameResult.setAttribute("class", "contactInfoText");
+	firstNameResult.setAttribute("id", "firstNameResult" + entryNumber);
+	firstNameResult.innerHTML = "failed to retrieve";
+	contactBlock.appendChild(firstNameResult);
+
+	// create & assign a break element
+	var newLine = document.createElement("br");
+	firstNameResult.appendChild(newLine);
+
+	// create LastName label element
+	var lastNameText = document.createElement("span");
+	lastNameText.setAttribute("class", "contactInfoText");
+	lastNameText.setAttribute("id", "");	// maybe not needed
+	lastNameText.innerHTML = "Last Name: ";
+	contactBlock.appendChild(lastNameText);
+
+	// create LastName result element
+	var lastNameResult = document.createElement("span");
+	lastNameResult.setAttribute("class", "contactInfoText");
+	lastNameResult.setAttribute("id", "lastNameResult" + entryNumber);
+	lastNameResult.innerHTML = "failed to retrieve";
+	contactBlock.appendChild(lastNameResult);
+
+	// create & assign a break element
+	var newLine = document.createElement("br");
+	lastNameResult.appendChild(newLine);
+
+	// create Phone label element
+	var phoneText = document.createElement("span");
+	phoneText.setAttribute("class", "contactInfoText");
+	phoneText.setAttribute("id", "");	// maybe not needed
+	phoneText.innerHTML = "Phone: ";
+	contactBlock.appendChild(phoneText);
+
+	// create Phone result element
+	var phoneResult = document.createElement("span");
+	phoneResult.setAttribute("class", "contactInfoText");
+	phoneResult.setAttribute("id", "phoneResult" + entryNumber);
+	phoneResult.innerHTML = "failed to retrieve";
+	contactBlock.appendChild(phoneResult);
+
+	// create & assign a break element
+	var newLine = document.createElement("br");
+	phoneResult.appendChild(newLine);
+
+	// create Email label element
+	var emailText = document.createElement("span");
+	emailText.setAttribute("class", "contactInfoText");
+	emailText.setAttribute("id", "");	// maybe not needed
+	emailText.innerHTML = "Email: ";
+	contactBlock.appendChild(emailText);
+
+	// create Email result element
+	var emailResult = document.createElement("span");
+	emailResult.setAttribute("class", "contactInfoText");
+	emailResult.setAttribute("id", "emailResult" + entryNumber);
+	emailResult.innerHTML = "failed to retrieve";
+	contactBlock.appendChild(emailResult);
+
+	// create & assign a break element
+	var newLine = document.createElement("br");
+	emailResult.appendChild(newLine);
+}
+
+function createContactEntryBlock(entryNumber)
+{
+	// create the new div element with class & id values (id is unique and = entryNumber)
+	var contactBlock = document.createElement("div");
+	contactBlock.setAttribute("class", "contactEntryBlock");
+	contactBlock.setAttribute("id", entryNumber);
+
+	// get parent element we're going to assign the new div to
+	var displayResultsSection = document.getElementById("searchContactsResultsStart");
+	displayResultsSection.appendChild(contactBlock);	// assign div as a child
+
+	// Div Creation Finished
+
+	// populate div element with contact number identifier text
+	var contactNumberText = document.createElement("span");
+	contactNumberText.setAttribute("class", "contactNumberText");
+	contactNumberText.setAttribute("id", "");	// maybe not needed?
+	contactNumberText.innerHTML = "Contact #: " + entryNumber;	// new way
+	contactBlock.appendChild(contactNumberText);	// DEBUG: could be wrong, assign contact # text to new block
+
+	// create & assign a break element for numContactsMessage
+	var newLine = document.createElement("br");
+	contactNumberText.appendChild(newLine);
 }
 
 function saveCookie()

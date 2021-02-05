@@ -167,3 +167,25 @@ img:hover {
 .mb-4 {
 	margin-bottom: 1.5rem!important; 
 }
+
+/*
+    Temporary Styling Section for Contact Search Results
+*/
+#contactEntry {
+    color: #A2A4A4;
+}
+
+#numContactsMessage {
+    color: #F5F5DC; /*Beige*/
+}
+
+#searchContactsResult {
+    color: #F5F5DC;
+}
+
+.contactEntryBlock {
+    margin: 20px;
+    height: 200px;
+    width: 1500px;
+    background-color: #F5F5DC;
+}
