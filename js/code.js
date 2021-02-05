@@ -152,7 +152,6 @@ function doRegister()
 	try
 	{
 		xhr.send(jsonPayload);	// sends the communication request (with the JSON data)
-		
 				
 		//Empty field error messge
 		if(firstName === "" || lastName === "" || login === "" || password === ""){
@@ -161,10 +160,16 @@ function doRegister()
 		}
 
 		// TEST: Add a success message section
-               else{
+        else{
 			 document.getElementById("registerResult").innerHTML = "Registration Successful!";
 		}	
 	// TODO: Add an account already exists message section?
+		
+		//Success message
+		else{
+			
+			document.getElementById("registerResult").innerHTML = "Registration Successful!";
+		}
 		
 	}
 	// Error if registration communication fails?
