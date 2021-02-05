@@ -159,6 +159,8 @@ function doRegister()
 			document.getElementById("registerResult").innerHTML = "Please fill all fields";
 		}
 		// TODO: Add an account already exists message section?
+		
+		//Success message
 		else{
 			
 			document.getElementById("registerResult").innerHTML = "Registration Successful!";
