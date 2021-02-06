@@ -154,18 +154,17 @@ function doRegister()
 	{
 		xhr.send(jsonPayload);	// sends the communication request (with the JSON data)
 		
+		// TEST: Add a success message section
+		if(err.message === ""){
+			alert("Yay!");
+		}
 				
 		//Empty field error messge
 		if(firstName === "" || lastName === "" || login === "" || password === ""){
 		
 			document.getElementById("registerResult").innerHTML = "Please fill all fields";
 		}
-
-		// TEST: Add a success message section
-               else{
-			 document.getElementById("registerResult").innerHTML = "Registration Successful!";
-		}	
-	// TODO: Add an account already exists message section?
+		// TODO: Add an account already exists message section?
 		
 	}
 	// Error if registration communication fails?
@@ -278,7 +277,7 @@ function assignSearchData(entryNumber, jsonObject)
 
 	// obtain correct indices for the contact's information
 	startIndex = entryNumber * 4;
-	endIndex = startIndex + 4;
+	endIndex = startIndex + 3;
 
 	// use variables as shortcuts to the correct contact's information elements 
 	var firstName = document.getElementById("firstNameResult" + entryNumber);
@@ -289,14 +288,15 @@ function assignSearchData(entryNumber, jsonObject)
 	// assign search result information to the contact's entry
 	firstName.innerHTML = jsonObject.results[startIndex];	// firstName is first in jsonObject
 	lastName.innerHTML = jsonObject.results[startIndex + 1];	// lastName is second in jsonObject
-	phone.innerHTML = jsonObject.results[startIndex + 2];	// phone is third in jsonObject
-	email.innerHTML = jsonObject.results[endIndex];		// email is fourth in jsonObject
+	email.innerHTML = jsonObject.results[startIndex + 2];	// phone is third in jsonObject
+	phone.innerHTML = jsonObject.results[endIndex];		// email is fourth in jsonObject
 
 	// all contact information should be assigned at this point
 }
 
 function populateContactEntry(entryNumber)
 {
+	var searchContactsResults = document.getElementById("searchContactsResultsStart");
 	// create FirstName label element
 	var firstNameText = document.createElement("span");
 	firstNameText.setAttribute("class", "contactInfoText");
@@ -314,7 +314,7 @@ function populateContactEntry(entryNumber)
 
 	// create & assign a break element
 	var newLine = document.createElement("br");
-	firstNameResult.appendChild(newLine);
+	contactBlock.appendChild(newLine);
 
 	// create LastName label element
 	var lastNameText = document.createElement("span");
@@ -332,7 +332,7 @@ function populateContactEntry(entryNumber)
 
 	// create & assign a break element
 	var newLine = document.createElement("br");
-	lastNameResult.appendChild(newLine);
+	contactBlock.appendChild(newLine);
 
 	// create Phone label element
 	var phoneText = document.createElement("span");
@@ -350,7 +350,7 @@ function populateContactEntry(entryNumber)
 
 	// create & assign a break element
 	var newLine = document.createElement("br");
-	phoneResult.appendChild(newLine);
+	contactBlock.appendChild(newLine);
 
 	// create Email label element
 	var emailText = document.createElement("span");
@@ -368,7 +368,23 @@ function populateContactEntry(entryNumber)
 
 	// create & assign a break element
 	var newLine = document.createElement("br");
-	emailResult.appendChild(newLine);
+	contactBlock.appendChild(newLine);
+
+	// create & assign Update button
+	var updateButton = document.createElement("button");
+	updateButton.setAttribute("class", "contactButton");
+	updateButton.setAttribute("id", "updateButton" + entryNumber);
+	updateButton.innerHTML = "Update";
+	updateButton.setAttribute("onclick", "doUpdateContact()");
+	contactBlock.appendChild(updateButton);
+
+	// create & assign Delete button
+	var deleteButton = document.createElement("button");
+	deleteButton.setAttribute("class", "contactButton");
+	deleteButton.setAttribute("id", "deleteButton" + entryNumber);
+	deleteButton.innerHTML = "Delete";
+	deleteButton.setAttribute("onclick", "doDeleteContact()");
+	contactBlock.appendChild(deleteButton);
 }
 
 function createContactEntryBlock(entryNumber)
@@ -394,6 +410,16 @@ function createContactEntryBlock(entryNumber)
 	// create & assign a break element for numContactsMessage
 	var newLine = document.createElement("br");
 	contactNumberText.appendChild(newLine);
+}
+
+function doUpdateContact()
+{
+	alert("I do not work yet :)");
+}
+
+function doDeleteContact()
+{
+	alert("I do not work yet :)");
 }
 
 function saveCookie()
