@@ -207,6 +207,70 @@ function doAddContact()
 	}
 }
 
+function doDeleteContact()
+{
+	userId = getUserId();	// extract userId from saved cookie
+
+	// TODO: double check the proper casing for these variables to maintain consistency
+	var firstName = document.getElementById("contactFirstName").value;
+	var lastName = document.getElementById("contactLastName").value;
+	var email = document.getElementById("contactEmail").value;
+	var phone = document.getElementById("contactPhone").value;
+
+	// Gathers Contact Information: firstName, lastName, email, phone
+	// Gather User Information: userId
+	var jsonPayload = '{"userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "email" : "' + email + '", "phone" : "' + phone + '"}';
+
+	var url = urlBase + '/Delete.' + extension;	// shortcut to Delete.php endpoint
+
+	// TODO: figure out if synchronous or asynchronous is preferred in xhr.open
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	// TODO: check addColor() for extra statements in the try section and research functionality
+	try
+	{
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("deleteContactResult").innerHTML = err.message;
+	}
+}
+
+function doUpdateContact()
+{
+	userId = getUserId();	// extract userId from saved cookie
+
+	// TODO: double check the proper casing for these variables to maintain consistency
+	var firstName = document.getElementById("contactFirstName").value;
+	var lastName = document.getElementById("contactLastName").value;
+	var email = document.getElementById("contactEmail").value;
+	var phone = document.getElementById("contactPhone").value;
+
+	// Gathers Contact Information: firstName, lastName, email, phone
+	// Gather User Information: userId
+	var jsonPayload = '{"userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "email" : "' + email + '", "phone" : "' + phone + '"}';
+
+	var url = urlBase + '/Update.' + extension;	// shortcut to Delete.php endpoint
+
+	// TODO: figure out if synchronous or asynchronous is preferred in xhr.open
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	// TODO: check addColor() for extra statements in the try section and research functionality
+	try
+	{
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("updateContactResult").innerHTML = err.message;
+	}
+}
+
 function doSearchContacts()
 {
 	userId = getUserId();
