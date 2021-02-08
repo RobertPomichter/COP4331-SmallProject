@@ -2,8 +2,8 @@
 	
 	$inData = getRequestInfo(); 	// Getting request info for the contact to be deleted
 
-	$id = $inData["userId"];		// We definitely need the current user's ID
-	$phone = $inData["phone"];		// We can just use the contact's unique phone number to identify the contact to be deleted
+	$userId = $inData["userId"];		// We definitely need the current user's ID
+	$id = $inData["id"];		// We can just use the contact's unique phone number to identify the contact to be deleted
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -12,7 +12,7 @@
 	} 
 	else
 	{
-		$sql = "delete from Contacts where UserId = " .$id. " and Phone = '".$phone."'";
+		$sql = "delete from Contacts where UserId = " .$userId. " and id = '".$id."'";
 		if( $result = $conn->query($sql) != TRUE )
 		{
 			returnWithError( $conn->error );
