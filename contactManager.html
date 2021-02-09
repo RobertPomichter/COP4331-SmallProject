@@ -2,76 +2,116 @@
 <!-- Contact Manager Page (WIP) -->
 
 <html>
-<head lang="en">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<title>Contact Manager (WIP)</title>
-	<script type="text/javascript" src="js/code.js"></script>
-	<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	
-	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-	}, false);
-	</script>
-	
-</head>
-<body>
-
-<h1 id="title">Contact Manager (WIP)</h1>
-
-<!-- User Logged In display information-->
-<div id="loggedInDiv">
-	<span id="userName"></span><br />	<!-- Username text display element-->
-	<!-- Logout button, calls doLogout() from code.js-->
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
-
-<!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
-<div id="accessUIDiv">
-
-	<span id="referenceToContactManager">(for Color Manager, click the link below!)</span>
-    <br />
-	<a href="color.html">Go To Color Manager</a>
-	<br /><br /><br />
-
-	<!-- TEST: Obtain UserId from cookie-->
-	<button type="button" id="userIdTestButton" class="buttons" onclick="doTestUserId();">What's my User ID?</button>
-
-	<!-- Add Contact Section-->
-	<div id="addContactUI">
-		<span id="addContactTitle">Add Contact Function (WIP, untested until Search Contacts works)</span>
-		<input type="text" id="contactFirstName" placeholder="First Name" /><br />
-		<input type="text" id="contactLastName" placeholder="Last Name" /><br />
-		<input type="text" id="contactPhone" placeholder="Phone" /><br />
-		<input type="text" id="contactEmail" placeholder="Email" /><br />
-		<!-- Submission button to trigger Add Contact function-->
-		<button type="button" id="addContactButton" class="buttons" onclick="doAddContact();"> Add Contact </button>
-	</div>
-	<br /><br /><br />
-
-	<!-- Search Contacts Section-->
-	<div id="searchContactsUI">
-		<span id="searchContactsTitle">Search Contacts Function (WIP)</span>
-		<input type="text" id="searchFirstName" placeholder="First Name" /><br />
-		<input type="text" id="searchLastName" placeholder="Last Name" /><br />
-		<!-- Submission button to trigger Search Contacts function-->
-		<button type="button" id="searchContactsButton" class="buttons" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br />
-
-		<span id="searchContactsResult"></span><br />
-		<!-- Section marker where the actual contact search results are listed-->
-		<div id="searchContactsResultsStart"></div>
-
-		<!-- Individual contact divs inserted here-->
+	<head lang="en">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<title>Contact Manager (WIP)</title>
+		<script type="text/javascript" src="js/code.js"></script>
+		<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
+		<link href="css/styles.css" rel="stylesheet">	
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 		
-	</div>
-</div>
-
-</body>
+	
+		<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() 
+		{
+			readCookie();
+		}, false);
+		</script>
+		
+	</head>
+	<body>
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-2"></div>
+				<div class="col-lg-6 col-md-8 contact-manager-box">
+					<div class="col-lg-12 logo-key">
+						<!---------------------------------------------- Logo Image --------------------------------------------------------->
+						<a href="index.html">
+							<img class="d-block mx-auto mb-4" src="./images/aral.png" alt="Red Angler Fish Logo" width="126" height="100">
+						</a>						
+					</div>
+					<div class="col-lg-12 contact-manager-title"><h1 id="title">Contact Manager</h1></div>
+					<div class="col-lg-12 search-form">
+						<div class="col-lg-12 search-form">
+							
+					
+					
+							<!-- User Logged In display information-->
+							<div id="loggedInDiv">
+								<!-- Username text display element-->
+								<span id="userName"></span><br />
+								<!-- Logout button, calls doLogout() from code.js-->
+								<button type="button" id="logoutButton" class="btn btn-outline-primary" onclick="doLogout();"> Log Out </button>
+							</div>
+							</br>
+							<!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
+							<div id="accessUIDiv">
+								<!-- TEST: Obtain UserId from cookie-->
+								<button type="button" id="userIdTestButton" class="btn btn-outline-primary" onclick="doTestUserId();">What's my User ID?</button>
+							
+								<!-- Add Contact Section-->
+								<div class="col-lg-12 contact-manager-title"><h3 id="title">Add Contact</h3></div>
+								</br>
+								<span id="addContactTitle">Add Contact Function (WIP, untested until Search Contacts works)</span>
+								<form>
+									<div id="addContactUI">
+										<div class="form-group">
+											<label for="contactFirstName" class="form-control-label">First Name</label>
+											<input type="text" id="contactFirstName" class="form-control" placeholder="First Name" /><br />
+										</div>		
+										<div class="form-group">
+											<label for="contactLastName" class="form-control-label">Last Name</label>
+											<input type="text" id="contactLastName" class="form-control" placeholder="Last Name" /><br />
+										</div>		
+										<div class="form-group">		
+											<label for="contactPhone" class="form-control-label">Phone</label>
+											<input type="text" id="contactPhone" class="form-control" placeholder="Phone" /><br />
+										</div>		
+										<div class="form-group">		
+											<label for="contactEmail" class="form-control-label">Email</label>
+											<input type="text" id="contactEmail" class="form-control" placeholder="Email" /><br />
+										</div>
+										<!-- Submission button to trigger Add Contact function-->
+										<button type="button" id="addContactButton" class="btn btn-outline-primary" onclick="doAddContact();"> Add Contact </button>
+									</div>
+								
+									<div class="col-lg-12 contact-manager-title"><h3 id="title">Search Contact</h3></div>
+									<span id="searchContactsTitle">Search Contacts Function (WIP)</span>
+									<!-- Search Contacts Section-->
+									<div id="searchContactsUI">
+										<div class="form-group">
+											<label for="searchFirstName" class="form-control-label">First Name</label>
+											<input type="text" id="searchFirstName" class="form-control" placeholder="First Name" /><br />
+										</div>
+										<div class="form-group">
+											<label for="searchLastName" class="form-control-label">Last Name</label>
+											<input type="text" id="searchLastName" class="form-control" placeholder="Last Name" /><br />
+										</div>
+										<!-- Submission button to trigger Search Contacts function-->
+										<button type="button" id="searchContactsButton" class="btn btn-outline-primary" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br />
+									
+										<span id="searchContactsResult"></span><br />
+										<!-- Section marker where the actual contact search results are listed-->
+										
+										<!-- Individual contact divs inserted here-->
+										<div id="searchContactsResultsStart"></div>										
+									</div>
+								</form>
+							</div>
+						</div>				
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<footer>
+			<a href='https://www.freepik.com/vectors/background'>Background vector created by brgfx - www.freepik.com</a>
+		</footer>
+		
+	</body>
 </html>
