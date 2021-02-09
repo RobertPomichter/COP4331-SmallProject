@@ -13,6 +13,7 @@ var extension = 'php';
 var userId = 0;
 var firstName = "";
 var lastName = "";
+var numContacts = 0;
 var didSearch = false;
 
 // Performs the Log In function using user information captured by index.html
@@ -209,13 +210,19 @@ function doAddContact()
 function doSearchContacts()
 {
 	userId = getUserId();
-	var numContacts = 0;
+	//var numContacts = 0;
 	var i = 0;
-	var contactBlock;
+	var contactBlock;	// not needed?
 	var testMessage = "<span>This is a single contact entry!</span> <br />";
 
 	// TODO: ask what the search contacts input data is formatted like (user inputs into one text field,
 	// or user inputs into a firstName field and a lastName field)?
+
+	// if we've already searched, remove all html elements for the currently displayed results
+	if (didSearch == true) {
+			$( "div" ).remove(".contactEntryBlock");
+			$( "span" ).remove(".numContactsMessage");
+	}
 
 	var firstName = document.getElementById("searchFirstName").value;
 	var lastName = document.getElementById("searchLastName").value;
@@ -242,11 +249,20 @@ function doSearchContacts()
 		// JSON response package received, start inserting contact entry information into contactManager.html
 		var jsonObject = JSON.parse(xhr.responseText);
 
-		// count number of contacts in list (each content occupies 4 )
-		numContacts = jsonObject.results.length / 4;
+		/*
+		// TODO: test this, Check for no contacts
+		if (err.message == "No Records Found") {
+			document.getElementById("searchContactsResult").innerHTML = err.message;
+			return;
+		}
+		*/
+
+		// count number of contacts in list (each content occupies 5 )
+		numContacts = jsonObject.results.length / 5;
 
 		// DEBUG: insert new HTML element for displaying number of contacts (THIS WORKS, IS TEDIOUS)
 		var numContactsMessage = document.createElement("span");	// create element
+		numContactsMessage.setAttribute("class", "numContactsMessage");	// set class
 		numContactsMessage.setAttribute("id", "numContactsMessage");	// set id
 		numContactsMessage.innerHTML = "You have this many contacts: " + numContacts;	// new way
 		var displayResultsSection = document.getElementById("searchContactsResultsStart");	// get the parent element you're adding a child to
@@ -262,7 +278,10 @@ function doSearchContacts()
 	catch(err)
 	{
 		document.getElementById("searchContactsResult").innerHTML = err.message;
-	}	
+	}
+
+	// Search Completed, set boolean
+	didSearch = true;
 }
 
 function assignSearchData(entryNumber, jsonObject)
@@ -275,20 +294,22 @@ function assignSearchData(entryNumber, jsonObject)
 	var endIndex = 0;
 
 	// obtain correct indices for the contact's information
-	startIndex = entryNumber * 4;
-	endIndex = startIndex + 3;
+	startIndex = entryNumber * 5;
+	endIndex = startIndex + 4;
 
 	// use variables as shortcuts to the correct contact's information elements 
 	var firstName = document.getElementById("firstNameResult" + entryNumber);
 	var lastName = document.getElementById("lastNameResult" + entryNumber);
 	var email = document.getElementById("emailResult" + entryNumber);
 	var phone = document.getElementById("phoneResult" + entryNumber);
+	var contactId = document.getElementById("contactId" + entryNumber);
 
 	// assign search result information to the contact's entry
 	firstName.innerHTML = jsonObject.results[startIndex];	// firstName is first in jsonObject
 	lastName.innerHTML = jsonObject.results[startIndex + 1];	// lastName is second in jsonObject
 	email.innerHTML = jsonObject.results[startIndex + 2];	// phone is third in jsonObject
-	phone.innerHTML = jsonObject.results[endIndex];		// email is fourth in jsonObject
+	phone.innerHTML = jsonObject.results[startIndex + 3];		// email is fourth in jsonObject
+	contactId.innerHTML = jsonObject.results[endIndex];		// contact Id is fifth in jsonObject
 
 	// all contact information should be assigned at this point
 }
@@ -296,12 +317,20 @@ function assignSearchData(entryNumber, jsonObject)
 function populateContactEntry(entryNumber)
 {
 	var searchContactsResults = document.getElementById("searchContactsResultsStart");
+	var contactBlock = document.getElementById("contactBlock" + entryNumber);
+
+	// create contactId variable (is not displayed on the page)
+	var contactId = document.createElement("span");
+	contactId.setAttribute("id", "contactId" + entryNumber);
+	contactId.style.display = "none";	// make sure contactId is not displayed or affecting styling
+	contactId.innerHTML = "failed to retrieve";
+	contactBlock.appendChild(contactId);
+
 	// create FirstName label element
 	var firstNameText = document.createElement("span");
 	firstNameText.setAttribute("class", "contactInfoText");
 	firstNameText.setAttribute("id", "");	// maybe not needed
 	firstNameText.innerHTML = "First Name: ";
-	var contactBlock = document.getElementById(entryNumber);
 	contactBlock.appendChild(firstNameText);
 
 	// create FirstName result element
@@ -382,7 +411,7 @@ function populateContactEntry(entryNumber)
 	deleteButton.setAttribute("class", "contactButton");
 	deleteButton.setAttribute("id", "deleteButton" + entryNumber);
 	deleteButton.innerHTML = "Delete";
-	deleteButton.setAttribute("onclick", "doDeleteContact()");
+	deleteButton.setAttribute("onclick", "doDeleteContact(" + entryNumber + ")");
 	contactBlock.appendChild(deleteButton);
 }
 
@@ -391,7 +420,7 @@ function createContactEntryBlock(entryNumber)
 	// create the new div element with class & id values (id is unique and = entryNumber)
 	var contactBlock = document.createElement("div");
 	contactBlock.setAttribute("class", "contactEntryBlock");
-	contactBlock.setAttribute("id", entryNumber);
+	contactBlock.setAttribute("id", "contactBlock" + entryNumber);
 
 	// get parent element we're going to assign the new div to
 	var displayResultsSection = document.getElementById("searchContactsResultsStart");
@@ -416,9 +445,45 @@ function doUpdateContact()
 	alert("I do not work yet :)");
 }
 
-function doDeleteContact()
+function doDeleteContact(entryNumber)
 {
-	alert("I do not work yet :)");
+	var deleteSuccess = false;
+	userId = getUserId();
+	alert("Deleting contact entry: " + entryNumber);
+
+	// grab contactId from hidden element inside the entry
+	var id = document.getElementById("contactId" + entryNumber).innerHTML;
+
+	// create json package
+	var jsonPayload = '{"userId" : "' + userId + '", "id" : "' + id + '"}';
+
+	var url = urlBase + '/Delete.' + extension;	// shortcut to Delete.php endpoint
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.send(jsonPayload);
+
+		// TODO: any response messages likes errors or successes?
+
+		deleteSuccess = true;
+	}
+	catch(err)
+	{
+		// TODO: add error message here?
+		deleteSuccess = false;
+	}
+
+	if (deleteSuccess == true) {
+		// delete current set of elements for this contact, it is now deleted so it shouldn't be seen
+		// element deletion is not necessary! automatically done for some reason! :D
+
+		// update search results
+		doSearchContacts();
+	}
 }
 
 function saveCookie()
