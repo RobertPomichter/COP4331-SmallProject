@@ -13,7 +13,7 @@ footer {
 	color: white;
 }
 
-.login-box, .registration-box {
+.login-box, .registration-box, .contact-manager-box {
     margin-top: 75px;
     height: auto;
     background: #1A2226;
@@ -38,7 +38,7 @@ footer {
 	font-size: 15px;
 }
 
-.login-title, .registration-title {
+.login-title, .registration-title, .contact-manager-title {
     margin-top: 15px;
     text-align: center;
     font-size: 30px;
@@ -48,7 +48,7 @@ footer {
     color: #ECF0F5;
 }
 
-.login-form, .registration-form {
+.login-form, .registration-form, .search-form {
     margin-top: 25px;
     text-align: left;
 }
@@ -110,7 +110,7 @@ label {
     letter-spacing: 1px;
 }
 
-.btn-outline-primary {
+.btn-outline-primary, .contactButton {
     border-color: #0DB8DE;
     color: #0DB8DE;
     border-radius: 10px;
@@ -123,6 +123,23 @@ label {
     background-color: #0DB8DE;
     right: 0px;
 }
+
+.contactButton {
+    margin: 10px 0px;
+	border-color: #0DB8DE;
+    color: #0DB8DE;
+    border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.contact-button:hover {
+    background-color: #0DB8DE;
+    right: 0px;
+}
+
+
 
 .login-btm, .registration-btm {
     float: left;
@@ -184,8 +201,12 @@ img:hover {
 }
 
 .contactEntryBlock {
-    margin: 20px;
-    height: 200px;
-    width: 1500px;
-    background-color: #F5F5DC;
+    margin: 25px 0px;
+    height: auto;
+    background: #5bcdcd;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	border-radius: 15px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
 }
