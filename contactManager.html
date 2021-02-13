@@ -10,18 +10,18 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<title>Contact Manager (WIP)</title>
 		<script type="text/javascript" src="js/code.js"></script>
-		<script src="jquery-3.5.1.js"></script>						<!-- jQuery code-->
+		<!--
+		<script src="jquery-3.5.1.js"></script>						 jQuery code-->
 		<link href="css/styles.css" rel="stylesheet">	
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 		
-	
 		<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function() 
 		{
 			readCookie();
 		}, false);
 		</script>
-		
+
 	</head>
 	<body>
 	
@@ -38,9 +38,6 @@
 					<div class="col-lg-12 contact-manager-title"><h1 id="title">Contact Manager</h1></div>
 					<div class="col-lg-12 search-form">
 						<div class="col-lg-12 search-form">
-							
-					
-					
 							<!-- User Logged In display information-->
 							<div id="loggedInDiv">
 								<!-- Username text display element-->
@@ -51,49 +48,75 @@
 							</br>
 							<!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
 							<div id="accessUIDiv">
-								<!-- TEST: Obtain UserId from cookie-->
-								<button type="button" id="userIdTestButton" class="btn btn-outline-primary" onclick="doTestUserId();">What's my User ID?</button>
-							
 								<!-- Add Contact Section-->
 								<div class="col-lg-12 contact-manager-title"><h3 id="title">Add Contact</h3></div>
 								</br>
-								<span id="addContactTitle">Add Contact Function (WIP, untested until Search Contacts works)</span>
+
 								<form>
 									<div id="addContactUI">
 										<div class="form-group">
 											<label for="contactFirstName" class="form-control-label">First Name</label>
-											<input type="text" id="contactFirstName" class="form-control" placeholder="First Name" /><br />
+											<input type="text" id="contactFirstName" class="form-control" placeholder="First Name" />
 										</div>		
 										<div class="form-group">
 											<label for="contactLastName" class="form-control-label">Last Name</label>
-											<input type="text" id="contactLastName" class="form-control" placeholder="Last Name" /><br />
+											<input type="text" id="contactLastName" class="form-control" placeholder="Last Name" />
 										</div>		
 										<div class="form-group">		
 											<label for="contactPhone" class="form-control-label">Phone</label>
-											<input type="text" id="contactPhone" class="form-control" placeholder="Phone" /><br />
+											<input type="text" id="contactPhone" class="form-control" placeholder="Phone" />
 										</div>		
 										<div class="form-group">		
 											<label for="contactEmail" class="form-control-label">Email</label>
-											<input type="text" id="contactEmail" class="form-control" placeholder="Email" /><br />
+											<input type="text" id="contactEmail" class="form-control" placeholder="Email" />
 										</div>
 										<!-- Submission button to trigger Add Contact function-->
 										<button type="button" id="addContactButton" class="btn btn-outline-primary" onclick="doAddContact();"> Add Contact </button>
 									</div>
 								
-									<div class="col-lg-12 contact-manager-title"><h3 id="title">Search Contact</h3></div>
-									<span id="searchContactsTitle">Search Contacts Function (WIP)</span>
+									<div class="col-lg-12 contact-manager-title"><h3 id="title">Search Contacts</h3></div>
+
 									<!-- Search Contacts Section-->
 									<div id="searchContactsUI">
 										<div class="form-group">
 											<label for="searchFirstName" class="form-control-label">First Name</label>
-											<input type="text" id="searchFirstName" class="form-control" placeholder="First Name" /><br />
+											<input type="text" id="searchFirstName" class="form-control" placeholder="First Name" />
 										</div>
 										<div class="form-group">
 											<label for="searchLastName" class="form-control-label">Last Name</label>
-											<input type="text" id="searchLastName" class="form-control" placeholder="Last Name" /><br />
+											<input type="text" id="searchLastName" class="form-control" placeholder="Last Name" />
 										</div>
 										<!-- Submission button to trigger Search Contacts function-->
 										<button type="button" id="searchContactsButton" class="btn btn-outline-primary" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br />
+
+										<!-- Update Contact Modal Section-->
+										<div id="updateModal" class="modal fade" role="dialog">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title">Update Contact Information</h4>
+													</div>
+													<div class="modal-body">
+														<span id="updateContactMessage">Please enter the contact's updated information</span><br />
+														<label for="updateFirstName" class="form-control-label">First Name</label>
+														<input type="text" id="updateFirstName" class="form-control" placeholder="Enter First Name" /><br />
+														<label for="updateLastName" class="form-control-label">Last Name</label>
+														<input type="text" id="updateLastName" class="form-control" placeholder="Enter Last Name" /><br />
+														<label for="updatePhone" class="form-control-label">Phone</label>
+														<input type="text" id="updatePhone" class="form-control" placeholder="Enter Phone Number" /><br />
+														<label for="updateEmail" class="form-control-label">Email</label>
+														<input type="text" id="updateEmail" class="form-control" placeholder="Enter Email Address" /><br />
+														<span id="updateContactId" hidden="true"></span>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" onclick="doUpdateContact();">Update (WIP)</button>
+														<button type="button" class="btn btn-default" data-dismiss="modal">Close Modal</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- End Update Contact Modal Section-->
 									
 										<span id="searchContactsResult"></span><br />
 										<!-- Section marker where the actual contact search results are listed-->
