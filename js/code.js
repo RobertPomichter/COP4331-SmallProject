@@ -398,12 +398,24 @@ function populateContactEntry(entryNumber)
 	var newLine = document.createElement("br");
 	contactBlock.appendChild(newLine);
 
+	/* OLD BUTTON DESIGN WITHOUT MODAL
 	// create & assign Update button
 	var updateButton = document.createElement("button");
 	updateButton.setAttribute("class", "contactButton");
 	updateButton.setAttribute("id", "updateButton" + entryNumber);
 	updateButton.innerHTML = "Update";
 	updateButton.setAttribute("onclick", "doUpdateContact()");
+	contactBlock.appendChild(updateButton);
+	*/
+
+	// NEW BUTTON DESIGN WITH MODAL
+	var updateButton = document.createElement("button");
+	updateButton.setAttribute("type", "button");
+	updateButton.setAttribute("class", "contactButton");
+	updateButton.setAttribute("data-target", "#updateModal");
+	updateButton.setAttribute("id", "updateButton" + entryNumber);
+	updateButton.setAttribute("onclick", "prepareAndShowModal(" + entryNumber + ")");
+	updateButton.innerHTML = "Update";
 	contactBlock.appendChild(updateButton);
 
 	// create & assign Delete button
@@ -440,10 +452,78 @@ function createContactEntryBlock(entryNumber)
 	contactNumberText.appendChild(newLine);
 }
 
+// Updates the Contact's information associated with the button's location
+// Sends these to Update.php API endpoint: firstName, lastName, email, phone, id, userId
 function doUpdateContact()
 {
-	alert("I do not work yet :)");
+	userId = getUserId();	// extract userId from saved cookie
+
+	// gather the user's updated contact information from the modal
+	var id = document.getElementById("updateContactId").innerHTML;
+	var firstName = document.getElementById("updateFirstName").value;
+	var lastName = document.getElementById("updateLastName").value;
+	var phone = document.getElementById("updatePhone").value;
+	var email = document.getElementById("updateEmail").value;
+
+	var jsonPayload = '{"firstName" : "' + firstName + '", "lastName" : "' + lastName + '", "email" : "' + email + '", "phone" : "' + phone + '", "id" : "' + id + '", "userId" : "' + userId + '"}'
+
+	var url = urlBase + '/Update.' + extension;	// shortcut to Update.php
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.send(jsonPayload);
+
+		// TODO: any response messages likes errors or successes?
+	}
+	catch(err)
+	{
+		// TODO: error message
+	}
+
+	// once update is finished, close modal
+	$('#updateModal').modal('hide');
 }
+
+// Autofills the input fields of the Update Contact Modal with the contact's current information
+// Takes in entryNumber (from the contactBlock the update button is nested into)
+function prepareAndShowModal(entryNumber)
+{
+	// import hidden contactId into modal for Update Contact to reference
+	var hiddenContactId = document.getElementById("updateContactId");
+	var contactId = document.getElementById("contactId" + entryNumber).innerHTML;
+	hiddenContactId.innerHTML = contactId;
+
+	// create shortcut variables to input field elements of modal
+	var firstNameField = document.getElementById("updateFirstName");
+	var lastNameField = document.getElementById("updateLastName");
+	var phoneField = document.getElementById("updatePhone");
+	var emailField = document.getElementById("updateEmail");
+
+	// assign current contact's information to variables
+	var currentFirstName = document.getElementById("firstNameResult" + entryNumber).innerHTML;
+	var currentLastName = document.getElementById("lastNameResult" + entryNumber).innerHTML;
+	var currentPhone = document.getElementById("phoneResult" + entryNumber).innerHTML;
+	var currentEmail = document.getElementById("emailResult" + entryNumber).innerHTML;
+
+	// assign current contact's information to the input field's text to complete Autofill
+	firstNameField.setAttribute("value", currentFirstName);
+	lastNameField.setAttribute("value", currentLastName);
+	phoneField.setAttribute("value", currentPhone);
+	emailField.setAttribute("value", currentEmail);
+
+	// show modal
+	$('#updateModal').modal('show');
+}
+
+/*
+$(document).on("click", "#updateButton", setUpImport() {
+	entryNumber = document.getElementById("")
+)}
+*/
 
 function doDeleteContact(entryNumber)
 {
