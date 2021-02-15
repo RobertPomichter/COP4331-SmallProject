@@ -205,14 +205,14 @@ function doAddContact()
 			document.getElementById("addResult").innerHTML = "Please fill all fields";
 		}
 		else{
-			document.getElementById("registerResult").innerHTML = "Contact Added!"
+			document.getElementById("addResult").innerHTML = "Contact Added!"
 		}
 		
 			
 	}
 	catch(err)
 	{
-		document.getElementById("addContactResult").innerHTML = err.message;
+		document.getElementById("addResult").innerHTML = err.message;
 	}
 }
 
