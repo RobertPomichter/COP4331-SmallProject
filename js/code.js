@@ -200,10 +200,19 @@ function doAddContact()
 	try
 	{
 		xhr.send(jsonPayload);
+		
+		if(userId === "" || firstName === "" || lastName === "" || email === "" || phone === ""){
+			document.getElementById("addResult").innerHTML = "Please fill all fields";
+		}
+		else{
+			document.getElementById("addResult").innerHTML = "Contact Added!"
+		}
+		
+			
 	}
 	catch(err)
 	{
-		document.getElementById("addContactResult").innerHTML = err.message;
+		document.getElementById("addResult").innerHTML = err.message;
 	}
 }
 
