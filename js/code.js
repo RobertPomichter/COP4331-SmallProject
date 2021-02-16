@@ -21,22 +21,19 @@ var didSearch = false;
 function doLogin()
 {
 	// initialization section
-	userId = 0;	// weird that this isn't ID, it's Id, possible bug source?
+	userId = 0;
 	firstName = "";
 	lastName = "";
 	
 	var login = document.getElementById("loginName").value;	// grab loginName from index.html
 	var password = document.getElementById("loginPassword").value;	// grab loginPassword from index.html
-//	var hash = md5( password );	// create hashed password using md5.js algorithm
+	var hashedPassword = md5( password );	// create hashed password using md5.js algorithm
 	
 	// assigns an empty login result message (stays empty if login is successful)
 	document.getElementById("loginResult").innerHTML = "";
 
-	// JSON package creation - hashed password version
-//	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
-
 	// JSON package creation - user's inputted password version
-	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
+	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hashedPassword + '"}';
 
 	var url = urlBase + '/Login.' + extension;	// url shortcut variable made to Login.php
 
@@ -88,7 +85,6 @@ function doLogin()
 		saveCookie();	// stores firstName, lastName, userId
 						// cookie expires after 20 minutes
 	
-		// TODO: convert to contact manager
 		window.location.href = "contactManager.html";	// redirect user to contactManager.html page
 	}
 	catch(err)
@@ -99,7 +95,7 @@ function doLogin()
 
 }
 
-// TODO: Performs the Register User function using user information captured by register.html
+// Performs the Register User function using user information captured by register.html
 // and by calling the Register.php API endpoint
 // Requires User information: firstName, lastName, loginName, loginPassword
 function doRegister()
@@ -111,17 +107,14 @@ function doRegister()
 	var lastName = document.getElementById("lastName").value;	// grab lastName from register.html
 	var login = document.getElementById("loginName").value;	// grab loginName from register.html
 	var password = document.getElementById("loginPassword").value;	// grab loginPassword from register.html
-//	var hash = md5( password );	// create hashed password using md5.js algorithm
+	var hashedPassword = md5( password );	// create hashed password using md5.js algorithm
 	
 	// assigns a register result message TODO: When does this message happen? What should be in it?
 	document.getElementById("registerResult").innerHTML = "";
 
-	// JSON package creation - hashed password version
-//	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
-
 	// JSON package creation - user's inputted password version
-	// Gathers firstName, lastName, loginName, loginPassword
-	var jsonPayload = '{"firstName" : "' + firstName +'", "lastName" : "' + lastName + '", "login" : "' + login + '", "password" : "' + password + '"}';
+	// Gathers firstName, lastName, loginName, hashedPassword
+	var jsonPayload = '{"firstName" : "' + firstName +'", "lastName" : "' + lastName + '", "login" : "' + login + '", "password" : "' + hashedPassword + '"}';
 
 	var url = urlBase + '/Register.' + extension;	// url shortcut variable made to Register.php
 
@@ -149,7 +142,6 @@ function doRegister()
 	*/
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-	// TODO: convert from doLogin() copy paste to doRegister() functionality
 	// errors can happen during XHR communication
 	try
 	{
@@ -162,12 +154,9 @@ function doRegister()
 		}
 		else{
 			document.getElementById("registerResult").innerHTML = "Registration Successful!";
-			
-		}
-		// TODO: Add an account already exists message section?
-		
+			window.location.href = "index.html"	// if registration is successful, return to log in page
+		}		
 	}
-	// Error if registration communication fails?
 	catch(err)
 	{
 		// assign error message to registerResult in register.html
@@ -191,7 +180,6 @@ function doAddContact()
 
 	var url = urlBase + '/AddContact.' + extension;	// shortcut to AddContact.php endpoint
 
-	// TODO: figure out if synchronous or asynchronous is preferred in xhr.open
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -219,13 +207,9 @@ function doAddContact()
 function doSearchContacts()
 {
 	userId = getUserId();
-	//var numContacts = 0;
 	var i = 0;
-	var contactBlock;	// not needed?
+	var contactBlock;
 	var testMessage = "<span>This is a single contact entry!</span> <br />";
-
-	// TODO: ask what the search contacts input data is formatted like (user inputs into one text field,
-	// or user inputs into a firstName field and a lastName field)?
 
 	// if we've already searched, remove all html elements for the currently displayed results
 	if (didSearch == true) {
@@ -242,7 +226,6 @@ function doSearchContacts()
 
 	var url = urlBase + '/SearchContacts.' + extension;	// shortcut to SearchContacts.php endpoint
 
-	// TODO: figure out if synchronous or asynchronous is preferred in xhr.open
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -258,22 +241,14 @@ function doSearchContacts()
 		// JSON response package received, start inserting contact entry information into contactManager.html
 		var jsonObject = JSON.parse(xhr.responseText);
 
-		/*
-		// TODO: test this, Check for no contacts
-		if (err.message == "No Records Found") {
-			document.getElementById("searchContactsResult").innerHTML = err.message;
-			return;
-		}
-		*/
-
 		// count number of contacts in list (each content occupies 5 )
 		numContacts = jsonObject.results.length / 5;
 
-		// DEBUG: insert new HTML element for displaying number of contacts (THIS WORKS, IS TEDIOUS)
+		// DEBUG: insert new HTML element for displaying number of contacts
 		var numContactsMessage = document.createElement("span");	// create element
 		numContactsMessage.setAttribute("class", "numContactsMessage");	// set class
 		numContactsMessage.setAttribute("id", "numContactsMessage");	// set id
-		numContactsMessage.innerHTML = "You have this many contacts: " + numContacts;	// new way
+		numContactsMessage.innerHTML = "You have this many contacts: " + numContacts;
 		var displayResultsSection = document.getElementById("searchContactsResultsStart");	// get the parent element you're adding a child to
 		displayResultsSection.appendChild(numContactsMessage);	// add the new child element to the parent element
 
@@ -295,8 +270,8 @@ function doSearchContacts()
 
 function assignSearchData(entryNumber, jsonObject)
 {
-	// each contact entry's data takes up 4 jsonObject array slots
-	// example: contact 0 is stored in jsonObject[0] - jsonObject[3]
+	// each contact entry's data takes up 5 jsonObject array slots
+	// example: contact 0 is stored in jsonObject[0] - jsonObject[4]
 	// ensure the proper indices are used for the correct contact's information
 
 	var startIndex = 0;
@@ -407,16 +382,6 @@ function populateContactEntry(entryNumber)
 	var newLine = document.createElement("br");
 	contactBlock.appendChild(newLine);
 
-	/* OLD BUTTON DESIGN WITHOUT MODAL
-	// create & assign Update button
-	var updateButton = document.createElement("button");
-	updateButton.setAttribute("class", "contactButton");
-	updateButton.setAttribute("id", "updateButton" + entryNumber);
-	updateButton.innerHTML = "Update";
-	updateButton.setAttribute("onclick", "doUpdateContact()");
-	contactBlock.appendChild(updateButton);
-	*/
-
 	// NEW BUTTON DESIGN WITH MODAL
 	var updateButton = document.createElement("button");
 	updateButton.setAttribute("type", "button");
@@ -454,7 +419,7 @@ function createContactEntryBlock(entryNumber)
 	contactNumberText.setAttribute("class", "contactNumberText");
 	contactNumberText.setAttribute("id", "");	// maybe not needed?
 	contactNumberText.innerHTML = "Contact #: " + entryNumber;	// new way
-	contactBlock.appendChild(contactNumberText);	// DEBUG: could be wrong, assign contact # text to new block
+	contactBlock.appendChild(contactNumberText);
 
 	// create & assign a break element for numContactsMessage
 	var newLine = document.createElement("br");
@@ -465,7 +430,7 @@ function createContactEntryBlock(entryNumber)
 // Sends these to Update.php API endpoint: firstName, lastName, email, phone, id, userId
 function doUpdateContact()
 {
-	var entryNumber = document.getElementById("")
+	var entryNumber = document.getElementById("updateContactEntryNumber").innerHTML;
 	userId = getUserId();	// extract userId from saved cookie
 
 	// gather the user's updated contact information from the modal
@@ -494,8 +459,17 @@ function doUpdateContact()
 		// TODO: error message
 	}
 
-	// TODO: add a section to refresh displayed contact entry's data
-	var contactBlockFirstName = document.getElementById("")
+	// Get variable shortcuts to currently displayed contact info (old out of date info)
+	var currentFirstName = document.getElementById("firstNameResult" + entryNumber);
+	var currentLastName = document.getElementById("lastNameResult" + entryNumber);
+	var currentPhone = document.getElementById("phoneResult" + entryNumber);
+	var currentEmail = document.getElementById("emailResult" + entryNumber);
+
+	// replace out of date contact info with up to date info from the modal input fields
+	currentFirstName.innerHTML = firstName;
+	currentLastName.innerHTML = lastName;
+	currentPhone.innerHTML = phone;
+	currentEmail.innerHTML = email;
 
 	// once update is finished, close modal
 	$('#updateModal').modal('hide');
@@ -512,7 +486,7 @@ function prepareAndShowModal(entryNumber)
 
 	// import hidden entryNumber into modal for Update Contact to reference
 	var hiddenEntryNumber = document.getElementById("updateContactEntryNumber");
-	hiddenEntryNumber.innerHTML = hiddenEntryNumber;
+	hiddenEntryNumber.innerHTML = entryNumber;
 
 	// create shortcut variables to input field elements of modal
 	var firstNameField = document.getElementById("updateFirstName");
@@ -572,8 +546,6 @@ function doDeleteContact(entryNumber)
 	}
 
 	if (deleteSuccess == true) {
-		// delete current set of elements for this contact, it is now deleted so it shouldn't be seen
-		// element deletion is not necessary! automatically done for some reason! :D
 
 		// update search results
 		doSearchContacts();
