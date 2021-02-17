@@ -111,6 +111,12 @@ function doRegister()
 	
 	// assigns a register result message TODO: When does this message happen? What should be in it?
 	document.getElementById("registerResult").innerHTML = "";
+	
+	//Empty field error messge
+	if(firstName === "" || lastName === "" || login === "" || password === ""){
+		
+			document.getElementById("registerResult").innerHTML = "Please fill all fields";
+	}
 
 	// JSON package creation - user's inputted password version
 	// Gathers firstName, lastName, loginName, hashedPassword
@@ -145,14 +151,14 @@ function doRegister()
 	// errors can happen during XHR communication
 	try
 	{
-		xhr.send(jsonPayload);	// sends the communication request (with the JSON data)
-				
-		//Empty field error messge
-		if(firstName === "" || lastName === "" || login === "" || password === ""){
+		xhr.send(jsonPayload);// sends the communication request (with the JSON data)
+		var jsonObject = JSON.parse(xhr.responseText);
 		
-			document.getElementById("registerResult").innerHTML = "Please fill all fields";
-		}
-		else{
+		if( jsonObject.error.length > 0 && jsonObject.error != "Empty Fields"){
+			document.getElementById("registerResult").innerHTML = "Registration Error";
+		}		
+		//Success message if error is empty
+		if(jsonObject.error === ""){
 			document.getElementById("registerResult").innerHTML = "Registration Successful!";
 			window.location.href = "index.html"	// if registration is successful, return to log in page
 		}		
