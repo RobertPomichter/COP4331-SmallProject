@@ -154,11 +154,11 @@ function doRegister()
 		xhr.send(jsonPayload);// sends the communication request (with the JSON data)
 		var jsonObject = JSON.parse(xhr.responseText);
 		
-		if( jsonObject.error.length > 0){
+		if( jsonObject.error.length > 0 && jsonObject.error != "Empty Fields"){
 			document.getElementById("registerResult").innerHTML = "Registration Error";
 		}		
 		//Success message if error is empty
-		else{
+		if(jsonObject.error === ""){
 			document.getElementById("registerResult").innerHTML = "Registration Successful!";
 			window.location.href = "index.html"	// if registration is successful, return to log in page
 		}		
