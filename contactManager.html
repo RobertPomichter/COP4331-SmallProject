@@ -54,6 +54,7 @@
 
 								<form>
 									<div id="addContactUI">
+                    <!--                                                            
 										<div class="form-group">
 											<label for="contactFirstName" class="form-control-label">First Name</label>
 											<input type="text" id="contactFirstName" class="form-control" placeholder="First Name" />
@@ -70,13 +71,45 @@
 											<label for="contactEmail" class="form-control-label">Email</label>
 											<input type="text" id="contactEmail" class="form-control" placeholder="Email" />
 										</div>
+                    -->
 										<!-- Submission button to trigger Add Contact function-->
-										<button type="button" id="addContactButton" class="btn btn-outline-primary" onclick="doAddContact();"> Add Contact </button>
-										<div> 
-											<span id="addResult"></span> <!-- To display success (or error) message for adding a contact -->
+										<button type="button" id="addContactButton" class="btn btn-outline-primary" data-toggle="modal" data-target="#addContactModal"> Add Contact </button>
+									</div>									
+									
+									<!-- Add Contact Modal Section-->
+									<div id="addContactModal" class="modal fade" role="dialog">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">Add Contact Information</h4>
+												</div>
+												<div class="modal-body">
+													<span id="addContactMessage">Please enter the contact's information</span><br />
+													<!-- First Name -->
+													<label for="contactFirstName" class="form-control-label">First Name</label>
+													<input type="text" id="contactFirstName" class="form-control" placeholder="First Name" />
+													<!-- Last Name -->
+													<label for="contactLastName" class="form-control-label">Last Name</label>
+													<input type="text" id="contactLastName" class="form-control" placeholder="Last Name" />
+													<!-- Phone -->
+													<label for="contactPhone" class="form-control-label">Phone</label>
+													<input type="text" id="contactPhone" class="form-control" placeholder="Phone" />
+													<!-- Email -->
+													<label for="contactEmail" class="form-control-label">Email</label>
+													<input type="text" id="contactEmail" class="form-control" placeholder="Email" />
+													<!-- -->										
+												</div>
+												<div class="modal-footer">
+													<span id="addResult"></span> <!-- To display success (or error) message for adding a contact -->
+                          <button type="button" class="btn btn-default" onclick="doAddContact();">Add (WIP)</button>
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
 										</div>
 									</div>
-								
+									<!-- End Add Contact Modal Section-->
+
 									<div class="col-lg-12 contact-manager-title"><h3 id="title">Search Contacts</h3></div>
 
 									<!-- Search Contacts Section-->
@@ -91,7 +124,7 @@
 										</div>
 										<!-- Submission button to trigger Search Contacts function-->
 										<button type="button" id="searchContactsButton" class="btn btn-outline-primary" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br />
-
+										
 										<!-- Update Contact Modal Section-->
 										<div id="updateModal" class="modal fade" role="dialog">
 											<div class="modal-dialog">

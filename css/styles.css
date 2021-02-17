@@ -212,11 +212,13 @@ img:hover {
 }
 
 /*
-    Styling Section for Update Contact Modal Box
+    Styling Section for Add Contact and Update Contact Modal Box
+    Remember these are ids and NOT classes (Use hash tag)
+    Use rgba for opacity
 */
-.updateModal {
+#updateModal, #addContactModal {
     height: auto;   /* Test This*/
-    background: #5bcdcd;
+    background-color: rgba(48, 186, 186, .5);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
@@ -231,5 +233,5 @@ img:hover {
 }
 
 #addResult {
-    color: #F5F5DC; /*Beige*/;
+    color: #1A2226; /*Beige*/;
 }

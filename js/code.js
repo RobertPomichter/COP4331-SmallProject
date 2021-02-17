@@ -194,6 +194,8 @@ function doAddContact()
 		}
 		else{
 			document.getElementById("addResult").innerHTML = "Contact Added!"
+      // once add is finished, close modal
+	    $('#addContactModal').modal('hide');
 		}
 		
 			
