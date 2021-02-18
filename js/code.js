@@ -523,39 +523,43 @@ function prepareAndShowModal(entryNumber)
 
 function doDeleteContact(entryNumber)
 {
-	var deleteSuccess = false;
-	userId = getUserId();
-	alert("Deleting contact entry: " + entryNumber);
+	if(confirm("Are you sure you want to delete this contact?")) {
+		var deleteSuccess = false;
+		userId = getUserId();
+		alert("Deleting contact entry: " + entryNumber);
 
-	// grab contactId from hidden element inside the entry
-	var id = document.getElementById("contactId" + entryNumber).innerHTML;
+		// grab contactId from hidden element inside the entry
+		var id = document.getElementById("contactId" + entryNumber).innerHTML;
 
-	// create json package
-	var jsonPayload = '{"userId" : "' + userId + '", "id" : "' + id + '"}';
+		// create json package
+		var jsonPayload = '{"userId" : "' + userId + '", "id" : "' + id + '"}';
 
-	var url = urlBase + '/Delete.' + extension;	// shortcut to Delete.php endpoint
+		var url = urlBase + '/Delete.' + extension;	// shortcut to Delete.php endpoint
 
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, false);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url, false);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-	try
-	{
-		xhr.send(jsonPayload);
+		try
+		{
+			xhr.send(jsonPayload);
 
-		// TODO: any response messages likes errors or successes?
+			// TODO: any response messages likes errors or successes?
 
-		deleteSuccess = true;
-	}
-	catch(err)
-	{
-		// TODO: add error message here?
-		deleteSuccess = false;
-	}
+			deleteSuccess = true;
+		}
+		catch(err)
+		{
+			// TODO: add error message here?
+			deleteSuccess = false;
+		}
 
-	if (deleteSuccess == true) {
+		if (deleteSuccess == true) {
 
-		// update search results
+			// update search results
+			doSearchContacts();
+		}
+	} else {
 		doSearchContacts();
 	}
 }
