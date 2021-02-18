@@ -114,16 +114,20 @@
 
 									<!-- Search Contacts Section-->
 									<div id="searchContactsUI">
-										<div class="form-group">
+
+										<input class="form-control mb-4 searchBar" id="searchText" type="text"
+											placeholder="&#xf002 Search..." color="#0DB8DB" onkeyup="doSearchContacts()">
+
+										<!-- <div class="form-group">
 											<label for="searchFirstName" class="form-control-label">First Name</label>
 											<input type="text" id="searchFirstName" class="form-control" placeholder="First Name" />
 										</div>
 										<div class="form-group">
 											<label for="searchLastName" class="form-control-label">Last Name</label>
 											<input type="text" id="searchLastName" class="form-control" placeholder="Last Name" />
-										</div>
+										</div> -->
 										<!-- Submission button to trigger Search Contacts function-->
-										<button type="button" id="searchContactsButton" class="btn btn-outline-primary" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br />
+										<!-- <button type="button" id="searchContactsButton" class="btn btn-outline-primary" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br /> -->
 										
 										<!-- Update Contact Modal Section-->
 										<div id="updateModal" class="modal fade" role="dialog">

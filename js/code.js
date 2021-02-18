@@ -225,12 +225,11 @@ function doSearchContacts()
 			$( "span" ).remove(".numContactsMessage");
 	}
 
-	var firstName = document.getElementById("searchFirstName").value;
-	var lastName = document.getElementById("searchLastName").value;
+	var srchTxt = document.getElementById("searchString").value;
 
 	// Gather search contact information, put into JSON package
 	// User Input gathered: userId, searchFirstName, searchLastName
-	var jsonPayload = '{"userId" : "' + userId + '", "firstName" : "' + firstName + '", "lastName" : "' + lastName + '"}';
+	var jsonPayload = '{"userId" : "' + userId + '", "searchText" : "' + srchTxt + '"}';
 
 	var url = urlBase + '/SearchContacts.' + extension;	// shortcut to SearchContacts.php endpoint
 
