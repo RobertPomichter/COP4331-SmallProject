@@ -9,35 +9,27 @@
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap CSS -->
+    <!-- Old link, using link from index.html instead bc that one has a nicer hyperlink formatting for some reason
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">    <!-- Same link from index.html -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    <!-- Added back in to match index.html-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> <!-- Added back in to match index.html-->
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">	<!-- font reference-->
 	<!-- this is the page title that shows up in the browser tab-->
 	<title>Register New Account</title> 
-  
-  <!-- 
-		Unneccessary Code  
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  -->
-  
-	<!-- password hash code-->
-	<script type="text/javascript" src="js/md5.js"></script>
- 	<!-- main javascript code-->
-	<script type="text/javascript" src="js/code.js"></script>	
-	<!-- jQuery code-->
-	<script src="jquery-3.5.1.js"></script>						
-	<!-- CSS styling sheet-->
-    <link href="css/styles.css" rel="stylesheet">					
+	<script type="text/javascript" src="js/md5.js"></script> <!-- password hash code-->
+	<script type="text/javascript" src="js/code.js"></script> <!-- main javascript code-->
+	<script src="jquery-3.5.1.js"></script>	<!-- jQuery code-->					
+    <link href="css/styles.css" rel="stylesheet"> <!-- CSS styling sheet-->					
 </head>
 
 <!-- The body section is where the main content of your page goes (similar to a program's main() section)-->
 <body>
-			<!-- Header 1 title text-->
 
-<!-- Register Section TODO: convert all references to login to register,
-	implement actual registration behavior the HTML is responsible for-->
 	<div id="registerDiv" class="container">
 		<div class="row">
 			<div class="col-lg-3 col-md-2"></div>
@@ -51,31 +43,29 @@
 				<div class="col-lg-12 registration-title"><h1 id="title">Registration</h1></div>
 				<div class="col-lg-12 registration-form">
 					<div class="col-lg-12 registration-form">
-						<!-- Register prompt text: firstName, lastName-->
 						<form>
 							<!-------------------------------------- firstName input field------------------------------------------------>
+                            <h4 class="instructions" id="inner-title">Please enter your first name and last name</h4>
 							<div class="form-group">
-								<span class="instructions" id="inner-title">Please enter your first name and last name</span><br>
-								<label for="firstName" class="form-control-label">First Name</label>
-								<input class="form-control" type="text" id="firstName" placeholder="First Name"/>	
+								<input class="form-control" type="text" id="firstName" required/>
+                                <label class="form-control-label" for="firstName">First Name</label>
 							</div>	
 							<!-------------------------------------- lastName input field------------------------------------------------>
 							<div class="form-group">
-								<label for="lastName" class="form-control-label">Last Name</label>
-								<input class="form-control" type="text" id="lastName" placeholder="Last Name"/>
+								<input class="form-control" type="text" id="lastName" required/>
+                                <label class="form-control-label" for="lastName">Last Name</label>
 							</div>
 							<!-------------------------------------- username input field------------------------------------------------>
+                            <h4 class="instructions" id="inner-title">Please enter your desired username and password</h4>
 							<div class="form-group">
-								<!-- Register prompt text: Username, Password-->
-								<span class="instructions" id="inner-title">Please enter your desired username and password</span><br>
-								<label for="loginName" class="form-control-label">Username</label>
-								<input class="form-control" type="text" id="loginName" placeholder="Username" />
+								<input class="form-control" type="text" id="loginName" required/>
+                                <label class="form-control-label" for="loginName">Username</label>
 							</div>
 							<!-------------------------------------- password input field------------------------------------------------>
 							<div class="form-group">
-								<label for="loginPassword" class="form-control-label">Password</label>
-								<input class="form-control" type="password" id="loginPassword" placeholder="Password"/>
-							<div>
+								<input class="form-control" type="password" id="loginPassword" required/>
+                                <label class="form-control-label" for="loginPassword">Password</label>
+                            </div>
 							
 							<div class="col-lg-12 registrationbttm">
                                 <div class="col-lg-6 registration-btm registration-text">
@@ -83,10 +73,13 @@
                                 </div>
 								<!---------------------------------- submit button, calls ----------------------------------------------->
                                 <div class="col-lg-6 registration-btm register-button">
-                                    <button type="button" id="registerButton" class="btn btn-outline-primary" onclick="doRegister();"> Submit </button>
-									<!------------------------------ register result message display element----------------------------->
-									<span id="registerResult"></span> 
+                                    <button type="button" id="registerButton" class="btn btn-outline-primary" onclick="doRegister();"> Submit </button> 
 								</div>
+                                <div>
+                                    <!------------------------------ register result message display element----------------------------->
+									<span class="responseMessage" id="registerResult"></span>
+                                </div>
+                                <a href="index.html">Already have an account? Click here!</a>
 							</div>
 						</form>
 					</div>
@@ -96,17 +89,19 @@
 		</div>
 		<!-- Redirection to index.html -->
 		<p></p>
-		<a href="index.html">Already have an account? Click here!</a>
+		<!-- <a href="index.html">Already have an account? Click here!</a> -->
 	</div>
 
 	<footer>
 		<a href='https://www.freepik.com/vectors/background'>Background vector created by brgfx - www.freepik.com</a>
 	</footer>
 
+    
 	<!--Separate Popper and Bootstrap JS-->
+    <!--
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-
+    -->
+    
 </body>
-
 </html>
