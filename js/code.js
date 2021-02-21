@@ -64,28 +64,33 @@ function doLogin()
 	// errors can happen during XHR communication
 	try
 	{
-		xhr.send(jsonPayload);	// sends the communication request (with the JSON data)
-		
-		// Parse the JSON formatted response string, which has each data element identified
-		// by extensions ".id", ".firstName", ".lastName"
-		var jsonObject = JSON.parse( xhr.responseText );
-		
-		userId = jsonObject.id;	// extract userID from jsonObject
-		
-		if( userId < 1 )	// if userID is < 1, no account match in database was found
-		{
-			// assign error message to loginResult in index.html
-			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
-			return;
+		// Added Asynchronous Communication Method
+		xhr.onreadystatechange = function() {
+			// if communication was successful and we are in a ready state, perform necessary functions
+			if(this.readyState == 4 && this.status == 200) {
+				// Parse the JSON formatted response string, which has each data element identified
+				// by extensions ".id", ".firstName", ".lastName"
+				var jsonObject = JSON.parse( xhr.responseText );
+
+				userId = jsonObject.id;	// extract userID from jsonObject
+
+				if( userId < 1 )	// if userID is < 1, no account match in database was found
+				{
+					// assign error message to loginResult in index.html
+					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					return;
+				}
+
+				firstName = jsonObject.firstName;	// extract firstName from jsonObject
+				lastName = jsonObject.lastName;		// extract lastName from jsonObject
+
+				saveCookie();	// stores firstName, lastName, userId
+								// cookie expires after 20 minutes
+			
+				window.location.href = "contactManager.html";	// redirect user to contactManager.html page
+			}
 		}
-
-		firstName = jsonObject.firstName;	// extract firstName from jsonObject
-		lastName = jsonObject.lastName;		// extract lastName from jsonObject
-
-		saveCookie();	// stores firstName, lastName, userId
-						// cookie expires after 20 minutes
-	
-		window.location.href = "contactManager.html";	// redirect user to contactManager.html page
+		xhr.send(jsonPayload);	// sends the communication request (with the JSON data), happens first
 	}
 	catch(err)
 	{
@@ -151,17 +156,24 @@ function doRegister()
 	// errors can happen during XHR communication
 	try
 	{
-		xhr.send(jsonPayload);// sends the communication request (with the JSON data)
-		var jsonObject = JSON.parse(xhr.responseText);
-		
-		if( jsonObject.error.length > 0 && jsonObject.error != "Empty Fields"){
-			document.getElementById("registerResult").innerHTML = "Registration Error";
-		}		
-		//Success message if error is empty
-		if(jsonObject.error === ""){
-			document.getElementById("registerResult").innerHTML = "Registration Successful!";
-			window.location.href = "index.html"	// if registration is successful, return to log in page
-		}		
+		// Added Asynchronous Communication Method
+		xhr.onreadystatechange = function() {
+			// if communication was successful and we are in a ready state, perform necessary functions
+			if(this.readyState == 4 && this.status == 200) {
+				var jsonObject = JSON.parse(xhr.responseText);
+
+				if( jsonObject.error.length > 0 && jsonObject.error != "Empty Fields") {
+					document.getElementById("registerResult").innerHTML = "Registration Error";
+				}
+
+				//Success message if error is empty
+				if(jsonObject.error === ""){
+					document.getElementById("registerResult").innerHTML = "Registration Successful!";
+					window.location.href = "index.html"	// if registration is successful, return to log in page
+				}
+			}
+		}
+		xhr.send(jsonPayload); // sends the communication request (with the JSON data)
 	}
 	catch(err)
 	{
@@ -174,7 +186,6 @@ function doAddContact()
 {
 	userId = getUserId();	// extract userId from saved cookie
 
-	// TODO: double check the proper casing for these variables to maintain consistency
 	var firstName = document.getElementById("contactFirstName").value;
 	var lastName = document.getElementById("contactLastName").value;
 	var email = document.getElementById("contactEmail").value;
@@ -190,21 +201,26 @@ function doAddContact()
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-	// TODO: check addColor() for extra statements in the try section and research functionality
 	try
 	{
+		// Added Asynchronous Communication Method
+		xhr.onreadystatechange = function() {
+			// if communication was successful and we are in a ready state, perform necessary functions
+			if(this.readyState == 4 && this.status == 200) {
+
+				if(userId === "" || firstName === "" || lastName === "" || email === "" || phone === ""){
+					document.getElementById("addResult").innerHTML = "Please fill all fields";
+				}
+				else{
+					// TODO: correct response message for contact addition failure, currently says success
+					// for all cases
+					document.getElementById("addResult").innerHTML = "Contact Added!"
+			    	$('#addContactModal').modal('hide'); // once add is finished, close modal
+				}
+
+			}
+		}
 		xhr.send(jsonPayload);
-		
-		if(userId === "" || firstName === "" || lastName === "" || email === "" || phone === ""){
-			document.getElementById("addResult").innerHTML = "Please fill all fields";
-		}
-		else{
-			document.getElementById("addResult").innerHTML = "Contact Added!"
-      // once add is finished, close modal
-	    $('#addContactModal').modal('hide');
-		}
-		
-			
 	}
 	catch(err)
 	{
@@ -241,31 +257,36 @@ function doSearchContacts()
 	// TODO: check why the prof's example code includes so many
 	try
 	{
-		xhr.send(jsonPayload);
+		// Added Asynchronous Communication Method
+		xhr.onreadystatechange = function() {
+			// if communication was successful and we are in a ready state, perform necessary functions
+			if(this.readyState == 4 && this.status == 200) {
+				// DEBUG: success message for xhr communication and JSON retrieval
+				document.getElementById("searchContactsResult").innerHTML = "Contacts Retrieved";
 
-		// DEBUG: success message for xhr communication and JSON retrieval
-		document.getElementById("searchContactsResult").innerHTML = "Contacts Retrieved";
+				// JSON response package received, start inserting contact entry information into contactManager.html
+				var jsonObject = JSON.parse(xhr.responseText);
 
-		// JSON response package received, start inserting contact entry information into contactManager.html
-		var jsonObject = JSON.parse(xhr.responseText);
+				// count number of contacts in list (each content occupies 5 )
+				numContacts = jsonObject.results.length / 5;
 
-		// count number of contacts in list (each content occupies 5 )
-		numContacts = jsonObject.results.length / 5;
+				// DEBUG: insert new HTML element for displaying number of contacts
+				var numContactsMessage = document.createElement("span");	// create element
+				numContactsMessage.setAttribute("class", "numContactsMessage");	// set class
+				numContactsMessage.setAttribute("id", "numContactsMessage");	// set id
+				numContactsMessage.innerHTML = "You have this many contacts: " + numContacts;
+				var displayResultsSection = document.getElementById("searchContactsResultsStart");	// get the parent element you're adding a child to
+				displayResultsSection.appendChild(numContactsMessage);	// add the new child element to the parent element
 
-		// DEBUG: insert new HTML element for displaying number of contacts
-		var numContactsMessage = document.createElement("span");	// create element
-		numContactsMessage.setAttribute("class", "numContactsMessage");	// set class
-		numContactsMessage.setAttribute("id", "numContactsMessage");	// set id
-		numContactsMessage.innerHTML = "You have this many contacts: " + numContacts;
-		var displayResultsSection = document.getElementById("searchContactsResultsStart");	// get the parent element you're adding a child to
-		displayResultsSection.appendChild(numContactsMessage);	// add the new child element to the parent element
-
-		// insert the following HTML for each contact
-		for (i = 0; i < numContacts; i++) {
-			createContactEntryBlock(i);	// create div contact entry block
-			populateContactEntry(i);	// fill contact entry block with HTML elements
-			assignSearchData(i, jsonObject);	// assign correct search results to each HTML element
+				// insert the following HTML for each contact
+				for (i = 0; i < numContacts; i++) {
+					createContactEntryBlock(i);	// create div contact entry block
+					populateContactEntry(i);	// fill contact entry block with HTML elements
+					assignSearchData(i, jsonObject);	// assign correct search results to each HTML element
+				}
+			}
 		}
+		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
@@ -458,6 +479,12 @@ function doUpdateContact()
 
 	try
 	{
+		// Added Asynchronous Communication Method, probably not needed
+		xhr.onreadystatechange = function() {
+			// if communication was successful and we are in a ready state, perform necessary functions
+			if(this.readyState == 4 && this.status == 200) {
+			}
+		}
 		xhr.send(jsonPayload);
 
 		// TODO: any response messages likes errors or successes?
@@ -542,11 +569,14 @@ function doDeleteContact(entryNumber)
 
 		try
 		{
+			// Added Asynchronous Communication Method
+			xhr.onreadystatechange = function() {
+				// if communication was successful and we are in a ready state, perform necessary functions
+				if(this.readyState == 4 && this.status == 200) {
+					deleteSuccess = true;
+				}
+			}
 			xhr.send(jsonPayload);
-
-			// TODO: any response messages likes errors or successes?
-
-			deleteSuccess = true;
 		}
 		catch(err)
 		{
