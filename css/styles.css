@@ -40,7 +40,6 @@ footer {
     text-align: center;
 }
 
-
 .login-box, .registration-box {
     /* automatic box centering, but stretches the box to fit the window size, set to fixed originally */
     position: absolute;
@@ -56,14 +55,34 @@ footer {
 	border-radius: 15px;
 }
 
+
 .contact-manager-box {
+    /* OLD STYLING
     margin-top: 75px;
     height: auto;
     background: #1A2226;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 15px;
+    */
+
+    /* automatic box centering, but stretches the box to fit the window size, set to fixed originally */
+    /*
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    */
+
+    max-width: 1000px;   /* keeps box width from growing too wide */
+    margin-top: 50px;
+    height: auto;
+    background: #1A2226;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 15px;
 }
+
 
 .logo-key {
     height: 100px;
@@ -95,6 +114,39 @@ footer {
     margin-bottom: 30px;
 }
 
+.contact-manager-title {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #ECF0F5;
+}
+
+.contact-manager-subtitle {
+    position: relative;
+    display: block;
+    margin-top: ;
+    margin-bottom: ;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #ECF0F5;
+}
+
+.title {
+    display: block;
+    font-size: ;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    display: block;
+    margin-top: ;
+    margin-bottom: ;
+}
+
 .responseMessage {
     display: block;
     text-align: center;
@@ -120,7 +172,7 @@ footer {
     color: #ECF0F5;
 }
 
-.login-title, .contact-manager-title {
+.login-title {
     text-align: center;
     font-size: 30px;
     letter-spacing: 2px;
@@ -130,6 +182,7 @@ footer {
 
 .login-form, .search-form {
     margin-top: 15px;
+    margin-bottom: 15px;
     text-align: left;
 }
 
@@ -163,52 +216,6 @@ input[type=password] {
     margin-bottom: 20px;
     color: #ECF0F5;
 }
-
-/* Styling for each Div containing an input field */
-
-/*
-.form-control:focus {
-    border-color: inherit;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-bottom: 2px solid #0DB8DE;
-    outline: 0;
-    background-color: #1A2226;
-    color: #ECF0F5;
-}
-
-input:focus {
-    outline: none;
-    box-shadow: 0 0 0;
-}
-
-label {
-    margin-bottom: 0px;
-}
-
-.form-control-label {
-    font-size: 10px;
-    color: #6C6C6C;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: 0.2s all;   /* From Enrico Mattiazzi's Input Field Animation */
-}
-
-/*
-.btn-outline-primary, .contactButton {
-    border-color: #0DB8DE;
-    color: #0DB8DE;
-    border-radius: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
-.btn-outline-primary:hover {
-    background-color: #86DBEE;
-    right: 0px;
-}
-*/
 
 .contactButton {
     margin: 10px 0px;
@@ -278,17 +285,20 @@ img:hover {
 }
 
 #numContactsMessage {
-    color: #F5F5DC;
+    color: #ECF0F5;
 }
 
 #searchContactsResult {
-    color: #F5F5DC;
+    margin-top: 20px;
 }
 
 .contactEntryBlock {
+    padding-top: 5px;
     margin: 25px 0px;
     height: auto;
+    max-width: 300px;
     background: #5bcdcd;
+    margin-left: 22%;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 15px;
@@ -301,7 +311,7 @@ img:hover {
     Remember these are ids and NOT classes (Use hash tag)
     Use rgba for opacity
 */
-#updateModal, #addContactModal {
+.modal {
     height: auto;   /* Test This*/
     background-color: rgba(48, 186, 186, .5);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -309,12 +319,46 @@ img:hover {
     font-weight: bold;
 }
 
-#userName {
-    color: #F5F5DC; /*Beige*/
+.modal-content {
+    background-color: ;
 }
 
-#addResult {
-    color: #1A2226; /*Beige*/;
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    padding-top: 0px;
+    border-top: 0 none;
+}
+
+.current-user {
+    text-align: right;
+    margin-right: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#userName {
+    font-size: 20px;
+    color: #6C6C6C;
+}
+
+.logged-in-div {
+    margin-top: 10px;
+}
+
+#logoutButton {
+    left: 40%;
+    margin-bottom: 20px;
+}
+
+#addContactButton {
+    left: 55%
+}
+
+.addResultContainer {
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* Imported Animation Code from Shahen Algoo's Ripple Buttons */
@@ -481,84 +525,9 @@ img:hover {
     height: 44px;
     margin-bottom: 40px;
     outline: 0px;
-    position: relative;
     line-height: 44px;
 }
 
-/*
-.form-control:focus {
-    border-color: inherit;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-bottom: 2px solid #0DB8DE;
-    outline: 0;
-    background-color: #1A2226;
-    color: #ECF0F5;
-}
-*/
-
-/*
-input:focus {
-    /*
-    outline: none;
-    box-shadow: 0 0 0;
-    */
-}
-*/
-/*
-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    color: #d3d3d3;
-    transition: 0.2s all;
-    cursor: text;
-    margin-bottom: 0px;
-}
-*/
-/*
-.form-control-label {
-    font-size: 10px;
-    color: #6C6C6C;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: 0.2s all;   /* From Enrico Mattiazzi's Input Field Animation */
-}
-*/
-
-/*
-input {
-    width: 100%;
-    border: 0;
-    outline: 0;
-    padding: 0.5rem 0;
-    border-bottom: 2px solid #d3d3d3;
-    box-shadow: none;
-    color: #111;
-}
-
-input:invalid {
-    outline: 0;
-    // color: #ff2300;
-    //      border-color: #ff2300;
-}
-input:focus,
-input:valid {
-    border-color:;
-}
-input:focus~label,
-input:valid~label {
-    font-size: 14px;
-    top: -24px;
-    color: #00dd22;
-}
-*/
-
-/* Copy Paste Testing Section */
-form {
-
-}
 .form-group {
   position: relative;
   width: 100%;
@@ -569,6 +538,12 @@ form {
     color: #6C6C6C;
     font-weight: bold;
     letter-spacing: 1px;
+
+    /* old styling
+    color: #6C6C6C;
+    font-weight: bold;
+    letter-spacing: 1px;
+    */
 }
 .form-control:focus {
     border-color: inherit;

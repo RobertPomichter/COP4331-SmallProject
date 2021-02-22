@@ -220,6 +220,7 @@ function doAddContact()
 					
 					document.getElementById("addResult").innerHTML = "Contact Added!"
 			    		$('#addContactModal').modal('hide'); // once add is finished, close modal
+			    		document.getElementById("addResult").innerHTML = "";	// clear addResult message
 				}
 
 			}
@@ -266,7 +267,7 @@ function doSearchContacts()
 			// if communication was successful and we are in a ready state, perform necessary functions
 			if(this.readyState == 4 && this.status == 200) {
 				// DEBUG: success message for xhr communication and JSON retrieval
-				document.getElementById("searchContactsResult").innerHTML = "Contacts Retrieved";
+				//document.getElementById("searchContactsResult").innerHTML = "Contacts Retrieved";
 
 				// JSON response package received, start inserting contact entry information into contactManager.html
 				var jsonObject = JSON.parse(xhr.responseText);
@@ -448,15 +449,19 @@ function createContactEntryBlock(entryNumber)
 	// Div Creation Finished
 
 	// populate div element with contact number identifier text
+	/*
 	var contactNumberText = document.createElement("span");
 	contactNumberText.setAttribute("class", "contactNumberText");
 	contactNumberText.setAttribute("id", "");	// maybe not needed?
 	contactNumberText.innerHTML = "Contact #: " + entryNumber;	// new way
 	contactBlock.appendChild(contactNumberText);
+	*/
 
+	/*
 	// create & assign a break element for numContactsMessage
 	var newLine = document.createElement("br");
 	contactNumberText.appendChild(newLine);
+	*/
 }
 
 // Updates the Contact's information associated with the button's location
@@ -557,7 +562,7 @@ function doDeleteContact(entryNumber)
 	if(confirm("Are you sure you want to delete this contact?")) {
 		var deleteSuccess = false;
 		userId = getUserId();
-		alert("Deleting contact entry: " + entryNumber);
+		//alert("Deleting contact entry: " + entryNumber);
 
 		// grab contactId from hidden element inside the entry
 		var id = document.getElementById("contactId" + entryNumber).innerHTML;
