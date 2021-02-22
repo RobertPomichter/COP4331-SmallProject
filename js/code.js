@@ -190,6 +190,10 @@ function doAddContact()
 	var lastName = document.getElementById("contactLastName").value;
 	var email = document.getElementById("contactEmail").value;
 	var phone = document.getElementById("contactPhone").value;
+	
+	if(firstName === "" || lastName === "" || email === "" || phone === ""){
+		document.getElementById("addResult").innerHTML = "Please fill all fields";
+	}
 
 	// Gathers Contact Information: firstName, lastName, email, phone
 	// Gather User Information: userId
@@ -207,15 +211,15 @@ function doAddContact()
 		xhr.onreadystatechange = function() {
 			// if communication was successful and we are in a ready state, perform necessary functions
 			if(this.readyState == 4 && this.status == 200) {
-
-				if(userId === "" || firstName === "" || lastName === "" || email === "" || phone === ""){
-					document.getElementById("addResult").innerHTML = "Please fill all fields";
+				
+				var jsonObject = JSON.parse(xhr.responseText);
+				if( jsonObject.error.length > 0 && jsonObject.error != "Empty fields") {
+					document.getElementById("registerResult").innerHTML = "Add Contact Error";
 				}
-				else{
-					// TODO: correct response message for contact addition failure, currently says success
-					// for all cases
+				if(jsonObject.error === ""){
+					
 					document.getElementById("addResult").innerHTML = "Contact Added!"
-			    	$('#addContactModal').modal('hide'); // once add is finished, close modal
+			    		$('#addContactModal').modal('hide'); // once add is finished, close modal
 				}
 
 			}
