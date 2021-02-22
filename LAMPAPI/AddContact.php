@@ -16,15 +16,23 @@
 	} 
 	else
 	{
-		$sql = "insert into Contacts (UserId,FirstName, LastName, Email, Phone) VALUES (" . $userId . ",'" . $firstName . "', '".$lastName."', '".$email."', '".$phone."')";
-		if( $result = $conn->query($sql) != TRUE )
-		{
-			returnWithError( $conn->error );
+		if($firstName === "" || $lastName === "" || $email === "" || $phone === ""){
+			returnWithError("Empty fields");
+		}
+		else{
+			$sql = "insert into Contacts (UserId,FirstName, LastName, Email, Phone) VALUES (" . $userId . ",'" . $firstName . "', '".$lastName."', '".$email."', '".$phone."')";
+			if( $result = $conn->query($sql) != TRUE )
+			{
+				returnWithError( $conn->error );
+			}
+			else{
+				returnWithError("");
+			}
 		}
 		$conn->close();
 	}
 	
-	returnWithError("");
+	//returnWithError("");
 	
 	function getRequestInfo()
 	{
