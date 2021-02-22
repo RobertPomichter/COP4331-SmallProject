@@ -33,8 +33,6 @@
 <!-- The body section is where the main content of your page goes (similar to a program's main() section)-->
 <body>
 
-	
-
 	<div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-2"></div>
@@ -45,30 +43,37 @@
 						<img class="d-block mx-auto mb-4" src="./images/aral.png" alt="Red Angler Fish Logo" width="126" height="100">
 					</a>						
                 </div>
-                <div class="col-lg-12 login-title"><h1>ARA Login Page</h1></div>
+                <div class="col-lg-12 login-appDescription"><h3>An Underwater Contact Manager</h3></div>
+                <div class="col-lg-12 login-title"><h1>Login</h1></div>
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
                         <form>
 							<!-----------username input field------------>
                             <div class="form-group">
-                                <label class="form-control-label">USERNAME</label>
-                                <input type="text" id="loginName" class="form-control">
+                                <input type="text" id="loginName" class="form-control" required>
+                                <label class="form-control-label" for="loginName">USERNAME</label>
                             </div>
 							<!-----------password input field------------>
                             <div class="form-group">
-                                <label class="form-control-label">PASSWORD</label>
-                                <input type="password" id="loginPassword" class="form-control" i>
+                                <input type="password" id="loginPassword" class="form-control" required>
+                                <label class="form-control-label" for="loginPassword">PASSWORD</label>
                             </div>
 
                             <div class="col-lg-12 loginbttm">
                                 <div class="col-lg-6 login-btm login-text">
                                     <!-- Error Message -->
                                 </div>
+                                <!-- Old Button
+                                <div class="col-lg-6 login-btm login-button">
+                                    <button type="button" id="loginButton" class="btn btn-outline-primary" onclick="doLogin();">LOGIN</button>
+                                </div>
+                                -->
+                                <!-- New Button with Animation -->
                                 <div class="col-lg-6 login-btm login-button">
                                     <button type="button" id="loginButton" class="btn btn-outline-primary" onclick="doLogin();">LOGIN</button>
                                 </div>
 								<div>
-									<span id="loginResult"></span> <!-- login result message display element, only displays error messages-->
+									<span class="responseMessage" id="loginResult"></span> <!-- login result message display element, only displays error messages-->
 								</div>
 								<a href="register.html">Don't have an account? Click here!</a>
                             </div>
@@ -80,5 +85,9 @@
         </div>
 	</div>
 
+    <footer>
+		<a href='https://www.freepik.com/vectors/background'>Background vector created by brgfx - www.freepik.com</a>
+	</footer>
+    
 </body>
 </html>

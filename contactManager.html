@@ -2,176 +2,167 @@
 <!-- Contact Manager Page (WIP) -->
 
 <html>
-	<head lang="en">
+
+<head lang="en">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-		<title>Contact Manager (WIP)</title>
-		<script type="text/javascript" src="js/code.js"></script>
-		<!--
-		<script src="jquery-3.5.1.js"></script>						 jQuery code-->
-		<link href="css/styles.css" rel="stylesheet">	
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-		
-		<script type="text/javascript">
-		document.addEventListener('DOMContentLoaded', function() 
-		{
-			readCookie();
-		}, false);
-		</script>
-
-	</head>
-	<body>
+	<title>Contact Manager</title>
+	<script type="text/javascript" src="js/code.js"></script>
+	<!--
+	<script src="jquery-3.5.1.js"></script>						 jQuery code-->
+	<link href="css/styles.css" rel="stylesheet">	
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-2"></div>
-				<div class="col-lg-6 col-md-8 contact-manager-box">
-					<div class="col-lg-12 logo-key">
-						<!---------------------------------------------- Logo Image --------------------------------------------------------->
-						<a href="index.html">
-							<img class="d-block mx-auto mb-4" src="./images/aral.png" alt="Red Angler Fish Logo" width="126" height="100">
-						</a>						
+    <!-- Login Credential Checker - uses cookies to check if user is no longer logged in, which kickes them back to index.html -->
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() 
+	{
+		readCookie();
+	}, false);
+	</script>
+
+</head>
+
+<body>
+	
+	<div class="container">
+
+		<!-- Add Contact Modal Section-->
+		<div id="addContactModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Contact Information</h4>
 					</div>
-					<div class="col-lg-12 contact-manager-title"><h1 id="title">Contact Manager</h1></div>
-					<div class="col-lg-12 search-form">
-						<div class="col-lg-12 search-form">
-							<!-- User Logged In display information-->
-							<div id="loggedInDiv">
-								<!-- Username text display element-->
-								<span id="userName"></span><br />
-								<!-- Logout button, calls doLogout() from code.js-->
-								<button type="button" id="logoutButton" class="btn btn-outline-primary" onclick="doLogout();"> Log Out </button>
-							</div>
-							</br>
-							<!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
-							<div id="accessUIDiv">
-								<!-- Add Contact Section-->
-								<div class="col-lg-12 contact-manager-title"><h3 id="title">Add Contact</h3></div>
-								</br>
-
-								<form>
-									<div id="addContactUI">
-                    <!--                                                            
-										<div class="form-group">
-											<label for="contactFirstName" class="form-control-label">First Name</label>
-											<input type="text" id="contactFirstName" class="form-control" placeholder="First Name" />
-										</div>		
-										<div class="form-group">
-											<label for="contactLastName" class="form-control-label">Last Name</label>
-											<input type="text" id="contactLastName" class="form-control" placeholder="Last Name" />
-										</div>		
-										<div class="form-group">		
-											<label for="contactPhone" class="form-control-label">Phone</label>
-											<input type="text" id="contactPhone" class="form-control" placeholder="Phone" />
-										</div>		
-										<div class="form-group">		
-											<label for="contactEmail" class="form-control-label">Email</label>
-											<input type="text" id="contactEmail" class="form-control" placeholder="Email" />
-										</div>
-                    -->
-										<!-- Submission button to trigger Add Contact function-->
-										<button type="button" id="addContactButton" class="btn btn-outline-primary" data-toggle="modal" data-target="#addContactModal"> Add Contact </button>
-									</div>									
-									
-									<!-- Add Contact Modal Section-->
-									<div id="addContactModal" class="modal fade" role="dialog">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Add Contact Information</h4>
-												</div>
-												<div class="modal-body">
-													<span id="addContactMessage">Please enter the contact's information</span><br />
-													<!-- First Name -->
-													<label for="contactFirstName" class="form-control-label">First Name</label>
-													<input type="text" id="contactFirstName" class="form-control" placeholder="First Name" />
-													<!-- Last Name -->
-													<label for="contactLastName" class="form-control-label">Last Name</label>
-													<input type="text" id="contactLastName" class="form-control" placeholder="Last Name" />
-													<!-- Phone -->
-													<label for="contactPhone" class="form-control-label">Phone</label>
-													<input type="text" id="contactPhone" class="form-control" placeholder="Phone" />
-													<!-- Email -->
-													<label for="contactEmail" class="form-control-label">Email</label>
-													<input type="text" id="contactEmail" class="form-control" placeholder="Email" />
-													<!-- -->										
-												</div>
-												<div class="modal-footer">
-													<span id="addResult"></span> <!-- To display success (or error) message for adding a contact -->
-                          <button type="button" class="btn btn-default" onclick="doAddContact();">Add (WIP)</button>
-													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- End Add Contact Modal Section-->
-
-									<div class="col-lg-12 contact-manager-title"><h3 id="title">Search Contacts</h3></div>
-
-									<!-- Search Contacts Section-->
-									<div id="searchContactsUI">
-										<div class="form-group">
-											<label for="searchFirstName" class="form-control-label">First Name</label>
-											<input type="text" id="searchFirstName" class="form-control" placeholder="First Name" />
-										</div>
-										<div class="form-group">
-											<label for="searchLastName" class="form-control-label">Last Name</label>
-											<input type="text" id="searchLastName" class="form-control" placeholder="Last Name" />
-										</div>
-										<!-- Submission button to trigger Search Contacts function-->
-										<button type="button" id="searchContactsButton" class="btn btn-outline-primary" onclick="doSearchContacts();"> Search Contacts (WIP) </button><br /> <br />
-										
-										<!-- Update Contact Modal Section-->
-										<div id="updateModal" class="modal fade" role="dialog">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="modal-title">Update Contact Information</h4>
-													</div>
-													<div class="modal-body">
-														<span id="updateContactMessage">Please enter the contact's updated information</span><br />
-														<label for="updateFirstName" class="form-control-label">First Name</label>
-														<input type="text" id="updateFirstName" class="form-control" placeholder="Enter First Name" /><br />
-														<label for="updateLastName" class="form-control-label">Last Name</label>
-														<input type="text" id="updateLastName" class="form-control" placeholder="Enter Last Name" /><br />
-														<label for="updatePhone" class="form-control-label">Phone</label>
-														<input type="text" id="updatePhone" class="form-control" placeholder="Enter Phone Number" /><br />
-														<label for="updateEmail" class="form-control-label">Email</label>
-														<input type="text" id="updateEmail" class="form-control" placeholder="Enter Email Address" /><br />
-														<span id="updateContactId" hidden="true"></span>
-														<span id="updateContactEntryNumber" hidden="true"></span>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default" onclick="doUpdateContact();">Update (WIP)</button>
-														<button type="button" class="btn btn-default" data-dismiss="modal">Close Modal</button>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Update Contact Modal Section-->
-									
-										<span id="searchContactsResult"></span><br />
-										<!-- Section marker where the actual contact search results are listed-->
-										
-										<!-- Individual contact divs inserted here-->
-										<div id="searchContactsResultsStart"></div>										
-									</div>
-								</form>
-							</div>
-						</div>				
+					<div class="modal-body">
+						<span id="addContactMessage">Please enter the contact's information</span>
+						<!-- First Name -->
+						<input type="text" id="contactFirstName" class="form-control" placeholder= "First Name" required/>
+						<!-- Last Name -->
+						<input type="text" id="contactLastName" class="form-control" placeholder="Last Name" required/>
+						<!-- Phone -->
+						<input type="text" id="contactPhone" class="form-control" placeholder="Phone" required/>
+						<!-- Email -->
+						<input type="text" id="contactEmail" class="form-control" placeholder="Email" required/>
+						<!-- -->										
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" onclick="doAddContact();">Add</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<div class="addResultContainer">
+							<span id="addResult"></span> <!-- To display success (or error) message for adding a contact -->
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- End Add Contact Modal Section-->
+
+		<!-- Update Contact Modal Section-->
+		<div id="updateModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Update Contact Information</h4>
+					</div>
+					<div class="modal-body">
+						<span id="updateContactMessage">Please enter the contact's updated information</span>
+						<input type="text" id="updateFirstName" class="form-control" placeholder="Enter First Name" />
+						<input type="text" id="updateLastName" class="form-control" placeholder="Enter Last Name" />
+						<input type="text" id="updatePhone" class="form-control" placeholder="Enter Phone Number" />
+						<input type="text" id="updateEmail" class="form-control" placeholder="Enter Email Address" />
+						<span id="updateContactId" hidden="true"></span>
+						<span id="updateContactEntryNumber" hidden="true"></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" onclick="doUpdateContact();">Update</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Update Contact Modal Section-->
+
+		<div class="row">
+			<div class="col-lg-3 col-md-2"></div>
+			<div class="col-lg-6 col-md-8 contact-manager-box">
+				<div class="col-lg-12 logo-key">
+					<!---------------------------------------------- Logo Image --------------------------------------------------------->
+					<a href="index.html">
+						<img class="d-block mx-auto mb-4" src="./images/aral.png" alt="Red Angler Fish Logo" width="126" height="100">
+					</a>						
+				</div>
+				<div class="col-lg-12 contact-manager-title"><h1>Contact Manager</h1></div>
+
+				<div class="col-lg-12 logged-in-div">
+					<!-- Username text display element-->
+					<div class="current-user">
+						<span id="userName"></span>
+					</div>
+					
+					<div class="logout-button-container">
+						<!-- Logout button, calls doLogout() from code.js-->
+						<button type="button" id="logoutButton" class="btn btn-outline-primary" onclick="doLogout();">Log Out</button>
+					</div>
+					
+				</div>
+
+				<div class="col-lg-12 contact-manager-subtitle">
+					<h3 class="subtitle">Search Contacts</h3>
+				</div>
+
+				<div class="col-lg-12 search-form">
+					<div class="col-lg-12 search-form">
+						<!-- Main UI Section: search bar, search results, individual contact information and edit/delete buttons-->
+						<div id="accessUIDiv">
+							<form>
+								<!-- OLD ADD CONTACT MODAL SECTION STARTED HERE -->								
+
+								<!-- Search Contacts Section-->
+								<div id="searchContactsUI">
+									<!-- Search First Name Input -->
+									<div class="form-group">
+										<input type="text" id="searchFirstName" class="form-control" required>
+										<label for="searchFirstName" class="form-control-label">First Name</label>
+									</div>
+									<!-- Search Last Name Input -->
+									<div class="form-group">
+										<input type="text" id="searchLastName" class="form-control" required>
+										<label for="searchLastName" class="form-control-label">Last Name</label>
+									</div>
+
+									<!-- Submission button to trigger Search Contacts function-->
+									<button type="button" id="searchContactsButton" class="btn btn-outline-primary" onclick="doSearchContacts();">Search</button>
+
+									<!-- Add Contact button to bring up Add Contact Modal -->
+									<button type="button" id="addContactButton" class="btn btn-outline-primary" data-toggle="modal" data-target="#addContactModal">Add Contact</button>
+
+									<!-- OLD UPDATE CONTACT MODAL SECTION STARTED HERE -->
+									
+									<span class="responseMessage" id="searchContactsResult"></span>
+
+									<!-- Section marker where the actual contact search results are listed-->
+									
+									<!-- Individual contact divs inserted here-->
+									<div id="searchContactsResultsStart"></div>										
+								</div>
+							</form>
+						</div>
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer>
+		<a href='https://www.freepik.com/vectors/background'>Background vector created by brgfx - www.freepik.com</a>
+	</footer>
 		
-		<footer>
-			<a href='https://www.freepik.com/vectors/background'>Background vector created by brgfx - www.freepik.com</a>
-		</footer>
-		
-	</body>
+</body>
+
 </html>

@@ -1,3 +1,31 @@
+/*
+Animation Credits:
+    - Button Ripple/Wave animation: Shahen Algoo on Codepen: https://codepen.io/bootpen/pen/WrWZRd
+    - Input Field Click to move Label animation: Enrico Mattiazzi on Codepen: https://codepen.io/ettzzi/pen/ZWgWKw
+
+    Styling Notes:
+
+color palette: 
+    text:
+        main text: #ECF0F5 - off-white
+        secondary main text: #D4D8DC - less harsh off-white
+        mild gray: #6C6C6C
+        flavor text: default value (unspecified) - dark gray
+        
+        input field text: 
+    UI:
+        main div box background: #1A2226 - dark blue/gray
+
+    buttons:
+        button outline color: #0DB8DE - sky blue
+        button hover color: #0DB8DE - sky blue
+        lighter sky blue: #86DBEE
+*/
+
+/* Imported Fronts from Shahen Algoo's Ripple Buttons */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,100);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
 body {
     background-image: url("../images/arab.jpg");
     background-size: cover;
@@ -9,21 +37,67 @@ body {
 }
 
 footer {
-	text-align: center;
-	color: white;
+    text-align: center;
 }
 
-.login-box, .registration-box, .contact-manager-box {
-    margin-top: 75px;
-    height: auto;
+.login-box, .registration-box {
+    /* automatic box centering, but stretches the box to fit the window size, set to fixed originally */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    max-width: 700px;   /* keeps box width from growing too wide */
+    
     background: #1A2226;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 15px;
 }
 
-.login-key, .logo-key {
+
+.contact-manager-box {
+    /* OLD STYLING
+    margin-top: 75px;
+    height: auto;
+    background: #1A2226;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	border-radius: 15px;
+    */
+
+    /* automatic box centering, but stretches the box to fit the window size, set to fixed originally */
+    /*
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    */
+
+    max-width: 1000px;   /* keeps box width from growing too wide */
+    margin-top: 50px;
+    height: auto;
+    background: #1A2226;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 15px;
+}
+
+
+.logo-key {
     height: 100px;
+    width: 126px;
+    font-size: 80px;
+    line-height: 100px;
+    margin-left: 38%;
+    background: -webkit-linear-gradient(#27EF9F, #0DB8DE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-key {
+    height: 100px;
+    width: 126px;
     font-size: 80px;
     line-height: 100px;
     background: -webkit-linear-gradient(#27EF9F, #0DB8DE);
@@ -32,24 +106,88 @@ footer {
 }
 
 .instructions {
-	text-align: center;
-    color: #ECF0F5;
-    font-weight: bold;
+    display: block;
+	text-align: left;
+    color: #D4D8DC;
+    font-weight: 600;
 	font-size: 15px;
+    margin-bottom: 30px;
 }
 
-.login-title, .registration-title, .contact-manager-title {
-    margin-top: 15px;
+.contact-manager-title {
+    margin-top: 20px;
     text-align: center;
     font-size: 30px;
     letter-spacing: 2px;
-    margin-top: 15px;
     font-weight: bold;
     color: #ECF0F5;
 }
 
-.login-form, .registration-form, .search-form {
-    margin-top: 25px;
+.contact-manager-subtitle {
+    position: relative;
+    display: block;
+    margin-top: ;
+    margin-bottom: ;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #ECF0F5;
+}
+
+.title {
+    display: block;
+    font-size: ;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    display: block;
+    margin-top: ;
+    margin-bottom: ;
+}
+
+.responseMessage {
+    display: block;
+    text-align: center;
+    color: #6C6C6C;
+    margin-bottom: 20px;
+}
+
+.login-appDescription {
+    margin-top: 15px;
+    text-align: center;
+    letter-spacing: 2px;
+    font-style: italic;
+    color: #6C6C6C;
+}
+
+.registration-title {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #ECF0F5;
+}
+
+.login-title {
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #ECF0F5;
+}
+
+.login-form, .search-form {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.registration-form {
+    margin-top: 15px;
     text-align: left;
 }
 
@@ -79,51 +217,6 @@ input[type=password] {
     color: #ECF0F5;
 }
 
-.form-group {
-    margin-bottom: 40px;
-    outline: 0px;
-}
-
-.form-control:focus {
-    border-color: inherit;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-bottom: 2px solid #0DB8DE;
-    outline: 0;
-    background-color: #1A2226;
-    color: #ECF0F5;
-}
-
-input:focus {
-    outline: none;
-    box-shadow: 0 0 0;
-}
-
-label {
-    margin-bottom: 0px;
-}
-
-.form-control-label {
-    font-size: 10px;
-    color: #6C6C6C;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.btn-outline-primary, .contactButton {
-    border-color: #0DB8DE;
-    color: #0DB8DE;
-    border-radius: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
-.btn-outline-primary:hover {
-    background-color: #0DB8DE;
-    right: 0px;
-}
-
 .contactButton {
     margin: 10px 0px;
 	border-color: #0DB8DE;
@@ -135,10 +228,9 @@ label {
 }
 
 .contact-button:hover {
-    background-color: #0DB8DE;
+    background-color: #86DBEE;
     right: 0px;
 }
-
 
 
 .login-btm, .registration-btm {
@@ -193,17 +285,20 @@ img:hover {
 }
 
 #numContactsMessage {
-    color: #F5F5DC; /*Beige*/
+    color: #ECF0F5;
 }
 
 #searchContactsResult {
-    color: #F5F5DC;
+    margin-top: 20px;
 }
 
 .contactEntryBlock {
+    padding-top: 5px;
     margin: 25px 0px;
     height: auto;
+    max-width: 300px;
     background: #5bcdcd;
+    margin-left: 22%;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 15px;
@@ -216,7 +311,7 @@ img:hover {
     Remember these are ids and NOT classes (Use hash tag)
     Use rgba for opacity
 */
-#updateModal, #addContactModal {
+.modal {
     height: auto;   /* Test This*/
     background-color: rgba(48, 186, 186, .5);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -224,14 +319,313 @@ img:hover {
     font-weight: bold;
 }
 
+.modal-content {
+    background-color: ;
+}
+
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    padding-top: 0px;
+    border-top: 0 none;
+}
+
+.current-user {
+    text-align: right;
+    margin-right: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+
 #userName {
-    color: #F5F5DC; /*Beige*/
+    font-size: 20px;
+    color: #6C6C6C;
 }
 
-#registerResult {
-    color: #F5F5DC; /*Beige*/
+.logged-in-div {
+    margin-top: 10px;
 }
 
-#addResult {
-    color: #1A2226; /*Beige*/;
+#logoutButton {
+    left: 40%;
+    margin-bottom: 20px;
 }
+
+#addContactButton {
+    left: 55%
+}
+
+.addResultContainer {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Imported Animation Code from Shahen Algoo's Ripple Buttons */
+.ripples {
+    overflow: hidden;
+    position: relative;
+}
+
+.waves {
+    position: absolute;
+    display: block;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    -webkit-transform: scale(0);
+       -moz-transform: scale(0);
+         -o-transform: scale(0);
+            transform: scale(0);
+}
+
+.ripple {
+    -webkit-animation: ripple 0.65s linear;
+       -moz-animation: ripple 0.65s linear;
+        -ms-animation: ripple 0.65s linear;
+         -o-animation: ripple 0.65s linear;
+            animation: ripple 0.65s linear;
+}
+
+@-webkit-keyframes ripple {
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+    }
+}
+
+@-moz-keyframes ripple {
+    100% {
+        opacity: 0;
+        -moz-transform: scale(2.5);
+    }
+}
+
+@-o-keyframes ripple {
+    100% {
+        opacity: 0;
+        -o-transform: scale(2.5);
+    }
+}
+
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+
+/* Imported Button Styling Code (Modified) from Shahen Algoo's Ripple Buttons */
+.btn {
+    /*
+        Current styling for original buttons
+    border-color: #0DB8DE;
+    color: #0DB8DE;
+    border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    
+        Hover styling
+    background-color: #0DB8DE;
+    right: 0px;
+    */ 
+    
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    vertical-align: middle;
+    border: none;
+    padding: 0 16px;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #212121;
+    background-image: none;
+    background-color: #E0E0E0;
+    border-color: #0DB8DE;
+    color: #0DB8DE;
+    
+    -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+            border-radius: 10px;
+
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+
+    -webkit-transition: all 0.2s ease;
+       -moz-transition: all 0.2s ease;
+         -o-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+
+    -ms-touch-action: manipulation;
+        touch-action: manipulation;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+}
+
+/* Imported Button States from Shahen Algoo's Ripple Buttons */
+    .btn:focus,
+    .btn:active:focus,
+    .btn.active:focus,
+    .btn.focus,
+    .btn:active.focus,
+    .btn.active.focus {
+        outline: none;
+    }
+
+    .btn:hover,
+    .btn.hover {
+        background-color: #86DBEE;
+        right: 0px;
+    }
+    .btn:focus,
+    .btn.focus {
+        color: #212121;
+        text-decoration: none;
+    }
+
+    .btn:active,
+    .btn.active {
+        outline: 0;
+        background-image: none;
+    }
+
+    .btn.disabled,
+    .btn[disabled],
+    fieldset[disabled] .btn {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+
+    .btn .waves {
+        background-color: #0DB8DE;
+    }
+
+/* Imported Input Field Label Sliding Animation from Enrico Mattiazzi's Input Field Animation */
+.form-group { /* same as input-field */
+    position: relative;
+    width: 250px;
+    height: 44px;
+    margin-bottom: 40px;
+    outline: 0px;
+    line-height: 44px;
+}
+
+.form-group {
+  position: relative;
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+}
+.form-control-label {
+    color: #6C6C6C;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    /* old styling
+    color: #6C6C6C;
+    font-weight: bold;
+    letter-spacing: 1px;
+    */
+}
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0;
+}
+label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: 0.2s all;
+  cursor: text;
+}
+input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #d3d3d3;
+  box-shadow: none;
+  color: #111;
+}
+input:invalid {
+  outline: 0;
+  color: #0DB8DE;
+  border-color: #0DB8DE;
+}
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0;
+}
+input:valid {
+  border-color: #00dd22;
+}
+input:focus~label,
+input:valid~label {
+  font-size: 14px;
+  top: -30px;
+  color: #0DB8DE;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
